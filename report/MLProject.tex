@@ -1,0 +1,78 @@
+\documentclass[11pt, a4paper]{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{courier} % Required for the courier font
+\usepackage[utf8]{inputenc}
+\usepackage{datetime}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{arydshln}
+\usepackage{mathtools}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{slashbox}
+\usepackage[]{mcode}
+\usepackage{epstopdf}
+\usepackage{geometry}
+%%\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
+
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{J. Sahlström, A. Lindström \& D. Dürebrandt\\ \today} % Top left header
+\rhead{Machine Learning Project} % Right center head
+\chead{\firstxmark} % Center right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{\thepage} % Bottom center footer
+%\rfoot{Page\ \thepage\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+\newcommand\bigforall{\mbox{\LARGE $\mathsurround0pt\forall$}}  % Large for all symbol
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%   TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\includegraphics[width=0.5\textwidth]{../img/uu-logo.pdf}\\
+Machine Learning Project\\ \Large \emph{Classification of news articles}}
+\author{Jakob Sahlström \\ \scriptsize{jasa5691@student.uu.se} \\
+Anders Lindström \\ \scriptsize{anli6945@student.uu.se} \\
+Jesper Dürebrandt \\ \scriptsize{jedu6357@student.uu.se}}
+\date{\today} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\newpage
+\setcounter{page}{1}
+\begin{abstract}
+This is an abstract
+\end{abstract}
+\newpage
+\tableofcontents
+\newpage
+\section{Introduction}
+Describe the problem 
+Related work here maybe?
+\section{Theory}
+\section{Method}
+\section{Results}
+\section{Related work?}
+\section{Conclusions \& Future work}
+\begin{thebibliography}{99}
+	%\bibitem{bounds}Complexity bounds, D.Lukarski, Uppsala University, Course: Programming of Parallel Computers
+\end{thebibliography}
+
+\end{document}
