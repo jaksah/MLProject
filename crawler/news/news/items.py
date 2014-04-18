@@ -13,3 +13,9 @@ class NewsItem(Item):
     description = Field()
     subject = Field()
     # pass
+
+class ArticleItem(Item):
+    title = Field()
+    link = Field()
+    article = Field()
+    subject = Field()
