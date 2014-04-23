@@ -1,0 +1,18 @@
+Let $c$ be the class and $A = a_1, \dots ,a_n$ be the attributes of a document. Then with Bayes Theorem
+\begin{equation}
+p(c|A)=\frac{p(A|c)p(c)}{p(A)},
+\end{equation}
+the attributes $A$ is classified as class $C$ if and only if
+\begin{equation}
+f_b(A)=\frac{p(C|A)}{p(\neg C|A)} \geq 1,
+\end{equation}
+where $f_b(A)$ is called a $Bayesian$ classifier. Assuming all attributes are independent given the class, 
+\[
+p(A|c)=p(a_1,\dots ,a_n | c) = \prod_{i=1}^n p(x_i|c)
+\]
+the final classifier can be written as
+\begin{equation}
+f_{nb}(A) = \frac{p(C)}{p(\neg C)}\prod_{i=1}^n\frac{p(a_i|C)}{p(a_i|\neg C)}
+\end{equation}
+where $f_{nb}$ is called the \emph{Naive Bayesian} classifier.\\\\
+Two models that uses the Naive Bayes assumption are the \emph{multi-variate Bernoulli} model and the \emph{multinominal} model. The main difference is that the Bernoulli model does not take into account the frequency of a word which the multinominal model does.
