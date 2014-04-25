@@ -1,0 +1,15 @@
+Random Forest (RF) is based on building several considerably small classification trees. Consider having a feature vector that is of length $N$, then randomly select $n << N$ of those features. Build the trees with some kind of algorithm (e.g. C4.5), where information gain is taken into consideration, and no pruning is done (i.e. expand the tree fully). Then repeat selecting $n$ new variables from $N$ until the wanted number of trees are built.
+\\\\
+After all the trees are built, they can be used to let a new vector of data pass through all the trees and then letting each tree \emph{vote} on what class the vector most probably should be a part of.
+
+\begin{algorithm}
+\caption{Random Forest
+    \label{alg:RF}}
+\begin{algorithmic}
+\State Let $x = (x_1,x_2,...,x_N)$ be a set of features;
+\While {{\it not enough trees}}
+	\State Randomly pick with replacement a subset containing $n << N$ features;
+	\State Use training set to build a decision tree using a classification algorithm, e.g. C4.5, except no pruning is done.
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
