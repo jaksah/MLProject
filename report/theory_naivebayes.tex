@@ -1,3 +1,4 @@
+\subsection{Naive Bayes classifier}
 Let $c$ be the class and $A = a_1, \dots ,a_n$ be the attributes of a document. Then with Bayes Theorem
 \begin{equation}
 p(c|A)=\frac{p(A|c)p(c)}{p(A)},
@@ -14,5 +15,5 @@ the final classifier can be written as
 \begin{equation}
 f_{nb}(A) = \frac{p(c)}{p(\neg c)}\prod_{i=1}^n\frac{p(a_i|c)}{p(a_i|\neg c)}
 \end{equation}
-where $f_{nb}$ is called the \emph{Naive Bayesian} classifier.\\\\
+where $f_{nb}$ is called the \emph{Naive Bayesian} (NB) classifier.\\\\
 Two models that uses the Naive Bayes assumption are the \emph{multi-variate Bernoulli} model and the \emph{multinomial} model. The main difference is that in the Bernoulli model the attributes are binary, indicating if a word from a vocabulary has occurred at least once or not. In the multinomial model the frequency of words are taken into account.
