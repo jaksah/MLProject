@@ -23,11 +23,6 @@ for f in glob.glob("../../../crawler/news/*-articles.json"):
 
 vocabulary = sorted(list(vocabularySet))
 
-with open("vocabularyList", 'w') as f:
-    for s in vocabulary:
-        f.write((s + '\n').encode('unicode-escape'))
-    f.close()
-
-for word in vocabulary:
-	print word
-print len(vocabulary)
+with open('vocabularyList', 'wb') as f:
+	pickle.dump(vocabulary, f)
+	f.close()
