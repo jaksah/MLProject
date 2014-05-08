@@ -4,6 +4,9 @@
 # Python compiled files
 *.pyc
 
+# IDEA IDE files
+.idea
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
