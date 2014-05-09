@@ -1,6 +1,7 @@
 from sklearn.naive_bayes import BernoulliNB
 from jsonToBinary import readWholeFileBernoulli
 import glob
+import re
 
 
 def bernoulli_classify():
@@ -8,18 +9,20 @@ def bernoulli_classify():
 	traindata = []
 	traintarget = []
 	for f in glob.glob("../res/articles/training_data/*-articles.json"):
-		target = f.replace("-article.json", "")
-		output = readWholeFileBernoulli(f,target)
-		traindata.append(output[0])
-		traintarget.append(output[1])
+		target = f.replace("-articles.json", "")
+		target = re.sub(r".*\/+","",target)
+		output = readWholeFileBernoulli(f, target)
+		traindata.extend(output[0])
+		traintarget.extend(output[1])
 
 	testdata = []
 	testtarget = []
 	for f in glob.glob("../res/articles/test_data/*-articles.json"):
-		target = f.replace("-article.json", "")
-		output = readWholeFileBernoulli(f,target)
-		testdata.append(output[0])
-		testtarget.append(output[1])
+		target = f.replace("-articles.json", "")
+		target = re.sub(r".*\/+","",target)
+		output = readWholeFileBernoulli(f, target)
+		testdata.extend(output[0])
+		testtarget.extend(output[1])
 
 	clf.fit(traindata, traintarget)
 	ncorrect = 0
@@ -27,12 +30,12 @@ def bernoulli_classify():
 	for i in range(len(testdata)):
 		predict = clf.predict(testdata[i])
 		correct = testtarget[i]
-		if predict == correct:
-			total += 1
+		if correct == predict[0]:
+			ncorrect += 1
 
-		print("Correct: {0} - Predicted: {1}".format(correct, predict))
+		print("Correct: {0} - Predicted: {1}".format(correct, predict[0]))
 
-	print "Correctness", ncorrect/total
+	print "Correct ", ncorrect, " Total ", total, " Correctness ", ncorrect*1.0/total
 
 
 def main():
