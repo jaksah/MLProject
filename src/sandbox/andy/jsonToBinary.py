@@ -1,20 +1,16 @@
 import json
-import tokenize
 import re
-import numpy
 import pickle
-from sets import Set
+from common import *
+
 
 def makeBinaryArrayBernoulli(j):
 	with open('vocabularyList', 'rb') as f:
 		my_list = pickle.load(f)
 	output = [0]*len(my_list)
 
-	articleSet = j['article'].split( )
-	articleSet = [x.lower() for x in articleSet] # To lower case
-	articleSet = [re.sub(r"[^a-z-]","",x) for x in articleSet]
-	articleSet = [re.sub(r"--+","",x) for x in articleSet]
-	articleSet = [re.sub(r"^-","",x) for x in articleSet]
+	articleSet = articleToSet(j['article'])
+
 	for i in range(len(my_list)):
 		if my_list[i] in articleSet:
 			output[i] = 1
