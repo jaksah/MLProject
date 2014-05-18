@@ -23,23 +23,11 @@ def readWholeFileBernoulli(filename,target):
 	fil.close()
 	total = []
 	for article in j:
+		if not article['article']:
+			continue
 		o = makeBinaryArrayBernoulli(article)
 		total.append(o)
 	#end for
 	t = [target]*len(total)
 	return total, t
 #end of function
-
-# def main():
-# 	fname = 'sports-articles.json'
-# 	target = fname.replace("-articles.json", "")
-# 	o = readWholeFileBernoulli(fname,target)
-# 	s = o[0]
-# 	t = o[1]
-# 	print len(t)
-# 	print len(o)
-
-# Standard boilerplate to call the main() function to begin
-# the program.
-# if __name__ == '__main__':
-# 	main()

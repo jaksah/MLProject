@@ -6,18 +6,34 @@ from nltk.corpus import stopwords
 
 # Convert article to set that is compatible with vocabulary
 def articleToSet(article):
+	article = fulltextcleanup(article)
 	article = article.split()
 	article = Set(article)  # Remove duplicates before cleaning
 	article = [x.lower() for x in article]
-	article = [re.sub(r"[^a-z-]","",x) for x in article]
-	article = [re.sub(r"--+","",x) for x in article]
-	article = [re.sub(r"^-","",x) for x in article]
+	article = singlewordcleanup(article)
 	article = removestopwords(article)
 	article = [stemword(x) for x in article]
 	articleset = Set(article)  # Remove duplicates after stemming
-
+	if '' in articleset:  # To avoid exception if '' is not in set
+		articleset.remove('')
 	return articleset
 # end def
+
+
+def fulltextcleanup(article):
+	illegal_patterns = [r"Media playback is unsupported on your device\s*Last updated at \d{2}.\d{2} BST",
+						r"Last updated at \d{2}:\d{2}", r"Media requires JavaScript to play"]
+	for pattern in illegal_patterns:
+		article = re.sub(pattern, "", article)
+	#end for
+	return article
+
+
+def singlewordcleanup(article):
+	illegal_patterns = [r"[^a-z-]", r"--+", r"^-"]
+	for pattern in illegal_patterns:
+		article = [re.sub(pattern, "", x) for x in article]
+	return article
 
 
 def stemword(aword):
