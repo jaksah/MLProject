@@ -26,7 +26,6 @@ def readWholeFileBernoulli(filename,target):
 	for article in j:
 		if not article['article']:
 			emptyarticles += 1
-			print('Empty!')
 			continue
 		o = makeBinaryArrayBernoulli(article)
 		total.append(o)
