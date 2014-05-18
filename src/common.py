@@ -1,5 +1,4 @@
 import re
-from sets import Set
 from stemming.porter2 import stem
 from nltk.corpus import stopwords
 
@@ -7,9 +6,10 @@ from nltk.corpus import stopwords
 # Convert article to set that is compatible with vocabulary
 def articleToSet(article):
 	article = articleToList(article)
-	articleset = Set(article)  # Remove duplicates after stemming
+	articleset = set(article)  # Remove duplicates after stemming
 	return articleset
 # end def
+
 
 # Convert article to set that is compatible with vocabulary
 def articleToList(article):
