@@ -64,8 +64,25 @@ def classify(classifier, datatype):
 
 
 def main():
-	clf = sys.argv[1]
-	datatype = sys.argv[2]
+	if (len(sys.argv) == 3):
+		clf = sys.argv[1]
+		datatype = sys.argv[2]
+	else:
+		print("Classifiers:")
+		print("ber: Bernoulli")
+		print("mn: Multinomial")
+		print("rf: Random Forest")
+		print("svm: SVM")
+		clf = raw_input("Choose classifier: ")
+
+		print(" ")
+		print("Datatypes:")
+		print("1: Binary array")
+		print("2: Count array")
+		print("3: Count normalized by document size")
+		print("4: Count normalized by sum(countsArray)")
+		datatype = raw_input("Choose datatype: ")
+
 	classify(clf, datatype)
 
 # Standard boilerplate to call the main() function to begin
