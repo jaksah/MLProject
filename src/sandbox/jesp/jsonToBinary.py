@@ -9,6 +9,7 @@ def makeBinaryArrayBernoulli(j):
 	output = [0]*len(my_list)
 
 	articleSet = articleToSet(j['article'])
+	
 	for i in range(len(my_list)):
 		if my_list[i] in articleSet:
 			output[i] = 1

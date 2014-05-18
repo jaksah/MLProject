@@ -5,18 +5,14 @@ import os
 import re
 import pickle
 from sets import Set
+from common import *
 
 vocabularySet = Set()
 
 for f in glob.glob("../res/articles/training_data/*-articles.json"):
 	jsonFile = json.load(open(f))
 	for line in jsonFile:
-		article = line['article'].split( )
-		article = [x.lower() for x in article]
-		article = [re.sub(r"[^a-z-]","",x) for x in article]
-		article = [re.sub(r"--+","",x) for x in article]
-		article = [re.sub(r"^-","",x) for x in article]
-		articleSet = Set(article)
+		articleSet = articleToSet(line['article'])
 		vocabularySet = vocabularySet | articleSet
 	# end for
 # end for
