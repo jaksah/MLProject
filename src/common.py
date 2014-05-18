@@ -6,17 +6,22 @@ from nltk.corpus import stopwords
 
 # Convert article to set that is compatible with vocabulary
 def articleToSet(article):
+	article = articleToList(article)
+	articleset = Set(article)  # Remove duplicates after stemming
+	return articleset
+# end def
+
+# Convert article to set that is compatible with vocabulary
+def articleToList(article):
 	article = fulltextcleanup(article)
 	article = article.split()
-	article = Set(article)  # Remove duplicates before cleaning
 	article = [x.lower() for x in article]
 	article = singlewordcleanup(article)
 	article = removestopwords(article)
 	article = [stemword(x) for x in article]
-	articleset = Set(article)  # Remove duplicates after stemming
-	if '' in articleset:  # To avoid exception if '' is not in set
-		articleset.remove('')
-	return articleset
+	article = filter(lambda a:a !='', article) # Remove ''
+
+	return article
 # end def
 
 
