@@ -22,10 +22,8 @@ def readWholeFileBernoulli(filename,target):
 	j = json.load(fil)
 	fil.close()
 	total = []
-	emptyarticles = 0
 	for article in j:
 		if not article['article']:
-			emptyarticles += 1
 			continue
 		o = makeBinaryArrayBernoulli(article)
 		total.append(o)
