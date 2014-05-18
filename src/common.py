@@ -22,7 +22,7 @@ def articleToSet(article):
 
 def fulltextcleanup(article):
 	illegal_patterns = [r"Media playback is unsupported on your device\s*Last updated at \d{2}.\d{2} BST",
-						r"Last updated at \d{2}:\d{2}"]
+						r"Last updated at \d{2}:\d{2}", r"Media requires JavaScript to play"]
 	for pattern in illegal_patterns:
 		article = re.sub(pattern, "", article)
 	#end for

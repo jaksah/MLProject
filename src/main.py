@@ -73,8 +73,8 @@ def svm_classify():
 
 
 def main():
-	#svm_classify();
-	bernoulli_classify()
+	svm_classify();
+	#bernoulli_classify()
 
 # Standard boilerplate to call the main() function to begin
 # the program.
