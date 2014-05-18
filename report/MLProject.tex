@@ -20,6 +20,7 @@
 \usepackage{blindtext}
 \usepackage{algorithm}				%För pseudokoder
 \usepackage{algpseudocode}			%För pseudokoder
+\usepackage{transparent}
 %%\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
 
 
@@ -44,7 +45,7 @@
 %----------------------------------------------------------------------------------------
 
 \title{
-%\includegraphics[width=0.5\textwidth]{../img/uu-logo.pdf}\\
+%\includegraphics[width=0.3\textwidth]{../img/uu-logo.pdf}\\
 Machine Learning Project\\ \Large \emph{Classification of news articles}}
 \author{
 Jakob Sahlström \\ \scriptsize{jasa5691@student.uu.se} 
@@ -57,7 +58,19 @@ Jesper Dürebrandt \\ \scriptsize{jedu6357@student.uu.se}
 
 %----------------------------------------------------------------------------------------
 
+\usepackage{eso-pic}
+\newcommand\BackgroundPic{%
+\put(0,0){%
+\parbox[b][1.68\paperheight]{\paperwidth}{%
+\vfill
+\centering
+{\transparent{0.20}\includegraphics[width=.7\paperwidth,height=.7\paperheight,trim=0 40 0 0, clip,%
+keepaspectratio]{img/uu-logo.pdf}}%
+\vfill
+}}}
+
 \begin{document}
+\AddToShipoutPicture*{\BackgroundPic}
 \twocolumn[
 \begin{@twocolumnfalse}
 \maketitle
@@ -73,6 +86,7 @@ Jesper Dürebrandt \\ \scriptsize{jedu6357@student.uu.se}
 %\newpage
 % \tableofcontents
 % \newpage
+
 \section{Introduction}
 \input{sections/intro.tex}
 \section{Theory}
