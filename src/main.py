@@ -1,30 +1,8 @@
 from sklearn.naive_bayes import BernoulliNB, MultinomialNB
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import svm
-from jsonToBinary import readWholeFileBernoulli
-import glob
-import re
+from jsonToBinary import *
 import sys
-
-
-def make_data(type):
-	databinary = []
-	target = []
-	datacount = []
-	data_doclen_norm = []
-	data_count_norm = []
-	for f in glob.glob("../res/articles/" + type + "_data/*-articles.json"):
-		t = f.replace("-articles.json", "")
-		t = re.sub(r".*\/+","",t)
-		o = readWholeFileBernoulli(f, t)
-		
-		target.extend(o[0])
-		databinary.extend(o[1])
-		datacount.extend(o[2])
-		data_doclen_norm.extend(o[3])
-		data_count_norm.extend(o[4])
-	return (target, databinary, datacount, data_doclen_norm, data_count_norm)
-# end make_data
 
 
 def getClassifier(x):
@@ -37,14 +15,14 @@ def getClassifier(x):
 	return clf
 
 
-def classify(classifier, datatype):
+def classify(classifier, datatype, pruned):
 	clf = getClassifier(classifier)
 	print clf
-	train = make_data('training')
+	train = make_data('training',pruned)
 	traintarget  = train[0]
 	traindata = train[int(datatype)]
 
-	test = make_data('test')
+	test = make_data('test',pruned)
 	testtarget  = test[0]
 	testdata = test[int(datatype)]
 
@@ -82,8 +60,9 @@ def main():
 		print("3: Count normalized by document size")
 		print("4: Count normalized by sum(countsArray)")
 		datatype = raw_input("Choose datatype: ")
+		pruned = int(raw_input("Pruned vocabulary (1 or 0): "))
 
-	classify(clf, datatype)
+	classify(clf, datatype, pruned)
 
 # Standard boilerplate to call the main() function to begin
 # the program.

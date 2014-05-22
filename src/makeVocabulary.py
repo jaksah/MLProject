@@ -1,10 +1,12 @@
 import json
 import glob
 import pickle
-from sets import Set
+import numpy
 from common import *
+from jsonToBinary import *
+from sklearn.feature_selection import SelectPercentile, SelectKBest, f_classif, chi2
 
-vocabularySet = Set()
+vocabularySet = set()
 
 for f in glob.glob("../res/articles/training_data/*-articles.json"):
 	jsonFile = json.load(open(f))
@@ -18,4 +20,23 @@ vocabulary = sorted(list(vocabularySet))
 
 with open('vocabularyList', 'wb') as f:
 	pickle.dump(vocabulary, f)
+	f.close()
+
+training_data = make_data('training',0)
+targets = training_data[0]
+samples = training_data[2]
+feature_selector = SelectKBest(f_classif,800)
+selected_samples = feature_selector.fit(samples,targets).get_support()
+
+pruned_vocabulary = []
+for i in range(0,len(selected_samples)):
+	if selected_samples[i]:
+		pruned_vocabulary.append(vocabulary[i])
+
+for word in pruned_vocabulary:
+	print word
+print len(pruned_vocabulary)
+
+with open('prunedVocabularyList', 'wb') as f:
+	pickle.dump(pruned_vocabulary, f)
 	f.close()
