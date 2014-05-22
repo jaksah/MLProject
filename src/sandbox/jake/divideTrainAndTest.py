@@ -57,11 +57,11 @@ def silentremove(filename):
 			raise  # re-raise exception if a different error occure
 
 
-#def main():
-	#dividetotrainandtestsets()
+def main():
+	dividetotrainandtestsets()
 
 # Standard boilerplate to call the main() function to begin
 # the program.
-#if __name__ == '__main__':
-	#main()
+if __name__ == '__main__':
+	main()
 

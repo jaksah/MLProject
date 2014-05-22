@@ -1,0 +1,34 @@
+[
+	{
+		"link": "http://feeds.bbci.co.uk/news/business/rss.xml",
+		"subject":  "Business"
+	},
+	{
+		"link": "http://feeds.bbci.co.uk/news/politics/rss.xml",
+		"subject": "Politics"
+	},
+	{
+		"link": "http://feeds.bbci.co.uk/news/health/rss.xml",
+		"subject": "Health"
+	},
+	{
+		"link": "http://feeds.bbci.co.uk/news/education/rss.xml",
+		"subject": "Education"
+	},
+	{
+		"link": "http://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
+		"subject": "Science_and_Environment"
+	},
+	{
+		"link": "http://feeds.bbci.co.uk/news/technology/rss.xml",
+		"subject": "Technology"
+	},
+	{
+		"link": "http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml",
+		"subject": "Entertainment_and_Arts"
+	},
+	{
+		"link": "http://feeds.bbci.co.uk/sport/0/rss.xml",
+		"subject": "Sports"
+	}
+]
