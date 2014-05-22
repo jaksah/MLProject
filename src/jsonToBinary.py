@@ -1,20 +1,20 @@
 import json
-import re
 import pickle
 from common import *
 
-def makeBinaryArrayBernoulli(j):
+def makeCountArray(j):
 	with open('vocabularyList', 'rb') as f:
-		my_list = pickle.load(f)
-	output = [0]*len(my_list)
+		vocab = pickle.load(f)
+	output = [0]*len(vocab)
 
-	articleSet = articleToSet(j['article'])
-	for i in range(len(my_list)):
-		if my_list[i] in articleSet:
-			output[i] = 1
+	article = articleToList(j['article'])
+	doclen = len(article)
+	for i in range(doclen):
+		if article[i] in vocab:
+			output[vocab.index(article[i])] += 1
 		#end if
 	#end for
-	return output
+	return output, 1.0/doclen
 #end of function
 
 def readWholeFileBernoulli(filename,target):
@@ -22,24 +22,25 @@ def readWholeFileBernoulli(filename,target):
 	j = json.load(fil)
 	fil.close()
 	total = []
+	totalbinary = []
+	total_doclen_norm = []
+	total_count_norm = []
 	for article in j:
-		o = makeBinaryArrayBernoulli(article)
+		if not article['article']:
+			continue
+		(o,inv_doclen) = makeCountArray(article)
 		total.append(o)
+		
+		o_temp = [x*inv_doclen for x in o]
+		total_doclen_norm.append(o_temp)
+		
+		inv_osum = 1.0/sum(o)
+		o_temp = [x*inv_osum for x in o]
+		total_count_norm.append(o_temp)
+		
+		obin = [1 if x>0 else 0 for x in o]
+		totalbinary.append(obin)
 	#end for
 	t = [target]*len(total)
-	return total, t
+	return t, totalbinary, total, total_doclen_norm, total_count_norm
 #end of function
-
-# def main():
-# 	fname = 'sports-articles.json'
-# 	target = fname.replace("-articles.json", "")
-# 	o = readWholeFileBernoulli(fname,target)
-# 	s = o[0]
-# 	t = o[1]
-# 	print len(t)
-# 	print len(o)
-
-# Standard boilerplate to call the main() function to begin
-# the program.
-# if __name__ == '__main__':
-# 	main()

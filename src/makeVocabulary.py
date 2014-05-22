@@ -1,8 +1,5 @@
 import json
-import tokenize
 import glob
-import os
-import re
 import pickle
 from sets import Set
 from common import *
