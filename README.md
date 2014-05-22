@@ -2,7 +2,7 @@ This is my heading
 ================
 Rapport
 ------------------
-- *Metod*
+- **Metod**
 - Teori
 	- Bernoulli
 		- Hur den hanterar multiclass
@@ -18,10 +18,10 @@ Rapport
 
 Kodning
 ------------------
-- *Info-gain*
+- **Info-gain**
 - ~~Mer data~~
-- *Dokumentegenskaper som features*
-- *Hybrid*
+- **Dokumentegenskaper som features**
+- **Hybrid**
 - Leave-one-out? (låg prioritet)
 
 Undersökningar
