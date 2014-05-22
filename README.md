@@ -6,17 +6,17 @@ Rapport
 —————————————
 - *Metod*
 - Teori
-	Bernoulli
-		Hur den hanterar multiclass
-	Multinomial
-		Hur den hanterar multiclass
-		Mer specifikt om multinomial
-	SVM
-		Lite mer utförligt
-	Random forest
-		Lite mer utförligt
+	- Bernoulli
+		- Hur den hanterar multiclass
+	- Multinomial
+		- Hur den hanterar multiclass
+		- Mer specifikt om multinomial
+	- SVM
+		- Lite mer utförligt
+	- Random forest
+		- Lite mer utförligt
 - Conclusion & Future work
-	Fyll på med ideer eftersom
+	- Fyll på med ideer eftersom
 
 Kodning
 ————————————
