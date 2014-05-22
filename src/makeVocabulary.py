@@ -25,7 +25,8 @@ with open('vocabularyList', 'wb') as f:
 training_data = make_data('training',0)
 targets = training_data[0]
 samples = training_data[2]
-feature_selector = SelectKBest(f_classif,800)
+#feature_selector = SelectKBest(f_classif,800)
+feature_selector = SelectPercentile(chi2,15)
 selected_samples = feature_selector.fit(samples,targets).get_support()
 
 pruned_vocabulary = []
