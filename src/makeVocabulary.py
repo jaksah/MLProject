@@ -1,10 +1,9 @@
 import json
 import glob
 import pickle
-from sets import Set
 from common import *
 
-vocabularySet = Set()
+vocabularySet = set()
 
 for f in glob.glob("../res/articles/training_data/*-articles.json"):
 	jsonFile = json.load(open(f))
