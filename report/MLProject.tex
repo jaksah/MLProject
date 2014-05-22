@@ -21,10 +21,11 @@
 \usepackage{algorithm}				%För pseudokoder
 \usepackage{algpseudocode}			%För pseudokoder
 \usepackage{transparent}
+\usepackage{enumitem}
 %%\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
 
 %%%%%%%%%%%%%%%%%%%%%%% FOR DRAFT %%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\printdraft}{1} % If we want to print draft
+\newcommand{\printdraft}{0} % If we want to print draft
 %%% USAGE IN TEXT:
 % 	\ifnum\printdraft>0
 % 		OUR DRAFT TEXT GOES HERE
@@ -95,14 +96,34 @@ keepaspectratio]{img/uu-logo.pdf}}%
 
 \section{Introduction}
 \input{sections/intro.tex}
+
 \section{Theory}
+%%%%%%%%%%%%%%%%%%%% DRAFT %%%%%%%%%%%%%%
+\ifnum\printdraft>0
+	\texttt{Some meta text here?}
+\fi
+%%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
 \input{sections/theory.tex}
+
 \section{Method}
+%%%%%%%%%%%%%%%%%%%% DRAFT %%%%%%%%%%%%%%
+\ifnum\printdraft>0
+	\texttt{Some meta text here?}
+\fi
+%%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
 \input{sections/method.tex}
+
 \section{Results}
+%%%%%%%%%%%%%%%%%%%% DRAFT %%%%%%%%%%%%%%
+\ifnum\printdraft>0
+	\texttt{Some meta text here?}
+\fi
+%%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
 \input{sections/result.tex}
+
 \section{Related work}
 \input{sections/relatedwork.tex}
+
 \section{Conclusions \& Future work}
 \input{sections/conclusion.tex}
 
