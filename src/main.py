@@ -6,38 +6,68 @@ import sys
 
 
 def getClassifier(x):
+
 	clf = {
-		'ber': BernoulliNB(),
-		'mn': MultinomialNB(),
-		'rf': RandomForestClassifier(n_estimators=500),
-		'svm': svm.SVC(kernel='linear'),
-		}.get(x, svm.SVC(kernel='linear'))
+		'ber': [BernoulliNB()],
+		'mn': [MultinomialNB()],
+		'rf': [RandomForestClassifier(n_estimators=500)],
+		'svm': [svm.SVC(kernel='linear')],
+		'hybrid': [BernoulliNB(), MultinomialNB(), RandomForestClassifier(n_estimators=500), svm.SVC(kernel='linear')]
+		}.get(x, [MultinomialNB()])
 	return clf
 
 
+def hasuniquemax(targetcount):
+	sortcount = sorted(targetcount, reverse=True)
+	return sortcount[0] != sortcount[1]
+
+
+
 def classify(classifier, datatype, pruned):
-	clf = getClassifier(classifier)
-	print clf
+	clfs = getClassifier(classifier)
+	print clfs
+
 	train = make_data('training',pruned)
-	traintarget  = train[0]
+	traintarget = train[0]
 	traindata = train[int(datatype)]
 
 	test = make_data('test',pruned)
-	testtarget  = test[0]
+	testtarget = test[0]
 	testdata = test[int(datatype)]
-
-	clf.fit(traindata, traintarget)
-	ncorrect = 0
+	ncorrect = [0]*len(clfs)
+	predict = [[0 for x in xrange(len(testdata))] for x in xrange(len(clfs))]
 	total = len(testdata)
+
+	# Predict for all classifiers
+	for c in range(0,len(clfs)):
+		clf = clfs[c]
+		clf.fit(traindata, traintarget)
+		for i in range(len(testdata)):
+			predict[c][i] = clf.predict(testdata[i])
+
+	# Check correctness
+	utargets = list(set(testtarget))
+	ntargets = len(utargets)
+	winner = [0]*len(testtarget)
 	for i in range(len(testdata)):
-		predict = clf.predict(testdata[i])
-		correct = testtarget[i]
-		if correct == predict[0]:
-			ncorrect += 1
+		targetcount = [0]*ntargets
+		for c in range(len(clfs)):
+			classpredicted = predict[c][i]
+			targetcount[utargets.index(classpredicted)]+=1
+		winidx = -1
+		if hasuniquemax(targetcount):
+			winidx = targetcount.index(max(targetcount))
+		else:
+			winidx = utargets.index(predict[1][i])  # Set default clf winner
+		winner[i] = utargets[winidx]
 
-		print("Correct: {0} - Predicted: {1}".format(correct, predict[0]))
+	correct = 0
+	for i in range(len(testtarget)):
 
-	print "Correct ", ncorrect, " Total ", total, " Correctness ", ncorrect*1.0/total
+		if testtarget[i] == winner[i]:
+			correct += 1
+
+	print("Correct: {0} - Total: {1} - Correctness: {2}".format(correct, total, (1.0*correct)/total))
 # end classify
 
 
@@ -51,6 +81,7 @@ def main():
 		print("mn: Multinomial")
 		print("rf: Random Forest")
 		print("svm: SVM")
+		print("hybrid: Hybrid of all")
 		clf = raw_input("Choose classifier: ")
 
 		print(" ")
@@ -60,6 +91,7 @@ def main():
 		print("3: Count normalized by document size")
 		print("4: Count normalized by sum(countsArray)")
 		datatype = raw_input("Choose datatype: ")
+		print(" ")
 		pruned = int(raw_input("Pruned vocabulary (1 or 0): "))
 
 	classify(clf, datatype, pruned)
