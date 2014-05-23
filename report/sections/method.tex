@@ -6,6 +6,8 @@
 	To classify the articles as accurately and fast as possible, the data has to be prepared in such way that it contains as much information as possible in a format as dense as possible. To achieve this, the articles were parsed into words with white-space as separator, then removed of all characters not found in the English alphabet, though keeping the '-' character. After that, the words were stemmed so that similar words would be on the same form, and not be seen as two different words. (E.g. "argued", "argues", "arguing" reduce to "argu".) When they had been stemmed, all so called stop words were removed (such as "a", "the", etc.)
 	\\\\
 	When the crawler was extracting articles, the crawler sometimes for various reasons failed to obtain the body text for some of the articles. The result was an empty field where all the body text would go. This was of course removed from the set of articles.
+	\subsection{Vocabulary}
+	To 
 	\subsection{Datatypes}
 	There are many different ways to represent a feature vector, and different classifiers might want it represented in different ways. We have chosen to investigate four different types of representations of the vocabulary. The different datatypes were
 	\begin{description}[noitemsep,nolistsep]
