@@ -9,7 +9,7 @@ def getClassifier(x):
 	clf = {
 		'ber': BernoulliNB(),
 		'mn': MultinomialNB(),
-		'rf': RandomForestClassifier(n_estimators=100),
+		'rf': RandomForestClassifier(n_estimators=500),
 		'svm': svm.SVC(kernel='linear'),
 		}.get(x, svm.SVC(kernel='linear'))
 	return clf
