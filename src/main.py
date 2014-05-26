@@ -38,6 +38,40 @@ def hasuniquemax(targetcount):
 	return sortcount[0] != sortcount[1]
 
 
+def makeconfusionmatrix(correct, testtarget, total, utargets, winner):
+	# Make a confusion matrix
+	cm = confusion_matrix(testtarget, winner)
+	cm = cm / cm.astype(np.float).sum(axis=1)
+	# Add one more column and row with zeros and a "total" at diagonal
+	cm = np.append(cm, [[1] for x in xrange(len(cm))], 1)
+	last_row = [0 for x in xrange(len(cm))]
+	last_row.append((1.0 * correct) / total)
+	cm = np.append(cm, [last_row], 0)
+	# Calculate number of classified values from percentage and overall total for class
+	annotate_count = [[0 for x in xrange(len(cm))] for x in xrange(len(cm))]
+	classcount = Counter(testtarget)
+	for j in xrange(len(cm) - 1):
+		for i in xrange(len(cm[0]) - 1):
+			annotate_count[j][i] = round(cm[j][i] * classcount.get(utargets[j]))
+			annotate_count[j][len(cm) - 1] += annotate_count[j][i]
+		annotate_count[len(cm) - 1][len(cm) - 1] += annotate_count[j][j]
+
+	# Show confusion matrix in a separate window
+	cax = pl.matshow(cm)
+	# Set count and percentage labels in plot
+	for j in xrange(len(cm)):
+		for i in xrange(len(cm[0])):
+			pl.annotate("%d\n(%2.1f%%)" % (annotate_count[j][i], 100 * cm[j][i]), xy=(i - 1.0 / 2.5, j + 1.0 / 7))
+
+	# Add the Total-label
+	utargets.append('Total')
+	#pl.title('Confusion matrix')
+	pl.colorbar(cax)
+	pl.ylabel('True label')
+	pl.xlabel('Predicted label')
+	pl.xticks(np.arange(len(utargets)), utargets, rotation=70)
+	pl.yticks(np.arange(len(utargets)), utargets)
+
 
 def classify(classifier, datatype, pruned):
 	clfs = getClassifier(classifier)
@@ -119,41 +153,7 @@ def classify(classifier, datatype, pruned):
 			print("{0} for {1} - {2}".format((100.0*similar_wrong[tmp_index])/total_both_wrong[tmp_index],names[i],names[j]))
 			tmp_index += 1
 
-	# Make a confusion matrix
-	cm = confusion_matrix(testtarget, winner)
-	cm = cm / cm.astype(np.float).sum(axis=1)
-
-	# Add one more column and row with zeros and a "total" at diagonal
-	cm = np.append(cm,[[1] for x in xrange(len(cm))],1)
-	last_row = [0 for x in xrange(len(cm))]
-	last_row.append((1.0*correct)/total)
-	cm = np.append(cm,[last_row],0)
-
-	# Calculate number of classified values from percentage and overall total for class
-	annotate_count = [[0 for x in xrange(len(cm))] for x in xrange(len(cm))]
-	classcount = Counter(testtarget)
-	for j in xrange(len(cm)-1): 
-		for i in xrange(len(cm[0])-1):
-			annotate_count[j][i] = round(cm[j][i]*classcount.get(utargets[j]))
-			annotate_count[j][len(cm)-1] += annotate_count[j][i]
-		annotate_count[len(cm)-1][len(cm)-1] += annotate_count[j][j]
-
-	# Show confusion matrix in a separate window
-	cax = pl.matshow(cm)
-	# Set count and percentage labels in plot
-	for j in xrange(len(cm)): 
-		for i in xrange(len(cm[0])):
-			pl.annotate("%d\n(%2.1f%%)" %(annotate_count[j][i],100*cm[j][i]),xy=(i-1.0/2.5,j+1.0/7))
-	
-	# Add the Total-label
-	utargets.append('Total')
-
-	#pl.title('Confusion matrix')
-	pl.colorbar(cax)
-	pl.ylabel('True label')
-	pl.xlabel('Predicted label')
-	pl.xticks(np.arange(len(utargets)),utargets,rotation=70)
-	pl.yticks(np.arange(len(utargets)),utargets)
+	makeconfusionmatrix(correct, testtarget, total, utargets, winner)
 
 
 	# END OF CALCULATING CORRECT, WRONG-SIMILARITIES AND CONFUSION MATRIX
@@ -169,9 +169,10 @@ def classify(classifier, datatype, pruned):
 
 
 def main():
-	if (len(sys.argv) == 3):
+	if (len(sys.argv) == 4):
 		clf = sys.argv[1]
 		datatype = sys.argv[2]
+		pruned = sys.argv[3]
 	else:
 		print("Classifiers:")
 		print("ber: Bernoulli")
