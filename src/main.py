@@ -3,6 +3,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn import svm
 from jsonToBinary import *
 import sys
+import pylab as pl
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+from collections import Counter
 
 
 def getClassifier(x):
@@ -14,6 +19,17 @@ def getClassifier(x):
 		'svm': [svm.SVC(kernel='linear')],
 		'hybrid': [BernoulliNB(), MultinomialNB(), RandomForestClassifier(n_estimators=500), svm.SVC(kernel='linear')]
 		}.get(x, [MultinomialNB()])
+	return clf
+
+def getClassifierName(x):
+
+	clf = {
+		'ber': ['Bernou'],
+		'mn':  ['Multin'],
+		'rf':  ['RandFo'],
+		'svm': ['SuppVM'],
+		'hybrid': ['Bernou','Multin','RandFo','SuppVM']
+		}.get(x, ['Multin'])
 	return clf
 
 
@@ -46,7 +62,7 @@ def classify(classifier, datatype, pruned):
 			predict[c][i] = clf.predict(testdata[i])
 
 	# Check correctness
-	utargets = list(set(testtarget))
+	utargets = sorted(list(set(testtarget)))
 	ntargets = len(utargets)
 	winner = [0]*len(testtarget)
 	for i in range(len(testdata)):
@@ -61,13 +77,94 @@ def classify(classifier, datatype, pruned):
 			winidx = utargets.index(predict[1][i])  # Set default clf winner
 		winner[i] = utargets[winidx]
 
-	correct = 0
-	for i in range(len(testtarget)):
 
+	# CALCULATING CORRECT, WRONG-SIMILARITIES AND CONFUSION MATRIX
+
+	# Calculate correctness and print
+	correct = 0
+	corrrect_clf = [0]*len(clfs)
+	for i in range(len(testtarget)):
 		if testtarget[i] == winner[i]:
 			correct += 1
+		for j in range(len(clfs)):
+			if testtarget[i] == predict[j][i]:
+				corrrect_clf[j] += 1
+
+	# Calculate how similar they vote wrong
+	clfcomb = 0
+	for i in range(len(clfs)):
+		clfcomb += i # Number of clf-combinations
+	total_wrong = [0]*clfcomb
+	total_both_wrong = [0]*clfcomb
+	similar_wrong = [0]*clfcomb
+	for i in range(len(testtarget)):
+		tmp_index = 0
+		for j in range(len(clfs)-1):
+			for k in range(j+1,len(clfs)):
+				if(predict[j][i] != testtarget[i] or predict[k][i] != testtarget[i]):
+					total_wrong[tmp_index] +=1
+				if(predict[j][i] != testtarget[i] and predict[k][i] != testtarget[i]):
+					total_both_wrong[tmp_index] +=1
+				if (predict[j][i] != testtarget[i] or predict[k][i] != testtarget[i]) and predict[k][i] == predict[j][i]:
+					similar_wrong[tmp_index] +=1
+				tmp_index += 1
+
+	#for i in xrange(clfcomb):
+#		print((1.0*similar_wrong[i])/total_wrong[i])
+	print("Similarities:")
+	tmp_index = 0
+	names = getClassifierName(classifier)
+	for i in range(len(clfs)-1):
+		for j in range(i+1,len(clfs)):
+			print("{0} for {1} - {2}".format((100.0*similar_wrong[tmp_index])/total_both_wrong[tmp_index],names[i],names[j]))
+			tmp_index += 1
+
+	# Make a confusion matrix
+	cm = confusion_matrix(testtarget, winner)
+	cm = cm / cm.astype(np.float).sum(axis=1)
+
+	# Add one more column and row with zeros and a "total" at diagonal
+	cm = np.append(cm,[[1] for x in xrange(len(cm))],1)
+	last_row = [0 for x in xrange(len(cm))]
+	last_row.append((1.0*correct)/total)
+	cm = np.append(cm,[last_row],0)
+
+	# Calculate number of classified values from percentage and overall total for class
+	annotate_count = [[0 for x in xrange(len(cm))] for x in xrange(len(cm))]
+	classcount = Counter(testtarget)
+	for j in xrange(len(cm)-1): 
+		for i in xrange(len(cm[0])-1):
+			annotate_count[j][i] = round(cm[j][i]*classcount.get(utargets[j]))
+			annotate_count[j][len(cm)-1] += annotate_count[j][i]
+		annotate_count[len(cm)-1][len(cm)-1] += annotate_count[j][j]
+
+	# Show confusion matrix in a separate window
+	cax = pl.matshow(cm)
+	# Set count and percentage labels in plot
+	for j in xrange(len(cm)): 
+		for i in xrange(len(cm[0])):
+			pl.annotate("%d\n(%2.1f%%)" %(annotate_count[j][i],100*cm[j][i]),xy=(i-1.0/2.5,j+1.0/7))
+	
+	# Add the Total-label
+	utargets.append('Total')
+
+	#pl.title('Confusion matrix')
+	pl.colorbar(cax)
+	pl.ylabel('True label')
+	pl.xlabel('Predicted label')
+	pl.xticks(np.arange(len(utargets)),utargets,rotation=70)
+	pl.yticks(np.arange(len(utargets)),utargets)
+
+
+	# END OF CALCULATING CORRECT, WRONG-SIMILARITIES AND CONFUSION MATRIX
 
 	print("Correct: {0} - Total: {1} - Correctness: {2}".format(correct, total, (1.0*correct)/total))
+	if len(clfs) == 4:
+		print("Bernou -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[0], total, (1.0*corrrect_clf[0])/total))
+		print("Multin -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[1], total, (1.0*corrrect_clf[1])/total))
+		print("RandFo -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[2], total, (1.0*corrrect_clf[2])/total))
+		print("SuppVM -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[3], total, (1.0*corrrect_clf[3])/total))
+	pl.show()
 # end classify
 
 
@@ -89,7 +186,7 @@ def main():
 		print("1: Binary array")
 		print("2: Count array")
 		print("3: Count normalized by document size")
-		print("4: Count normalized by sum(countsArray)")
+		print("4: Count normalized by max(countsArray)")
 		datatype = raw_input("Choose datatype: ")
 		print(" ")
 		pruned = int(raw_input("Pruned vocabulary (1 or 0): "))

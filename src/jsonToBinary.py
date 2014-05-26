@@ -59,8 +59,8 @@ def readWholeFileBernoulli(filename,target,pruned):
 		o_temp = [x*inv_doclen for x in o]
 		total_doclen_norm.append(o_temp)
 		
-		inv_osum = 1.0/sum(o)
-		o_temp = [x*inv_osum for x in o]
+		inv_omax = 1.0/max(o)
+		o_temp = [x*inv_omax for x in o]
 		total_count_norm.append(o_temp)
 		
 		obin = [1 if x>0 else 0 for x in o]
