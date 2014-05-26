@@ -186,7 +186,7 @@ def main():
 		print("1: Binary array")
 		print("2: Count array")
 		print("3: Count normalized by document size")
-		print("4: Count normalized by sum(countsArray)")
+		print("4: Count normalized by max(countsArray)")
 		datatype = raw_input("Choose datatype: ")
 		print(" ")
 		pruned = int(raw_input("Pruned vocabulary (1 or 0): "))
