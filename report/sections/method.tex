@@ -1,44 +1,44 @@
 \subsection{News Crawler}
-	A crawler was written and used that extracted articles from BBC\footnote{\url{http://www.bbc.com/}}. The crawler extracts which topic the article belongs to, which is written in the HTML-code of the page on BBC's articles. In total, about \texttt{--NUMBER--} articles where extracted under \texttt{--NUMBER--} different topics. This will be used as training and test data for the classifiers.
-	\subsection{Coding}
-	Pythons has been chosen as programming language to extend our knowledge and experience of implementing different types of classifiers with different classify-packages and further understand how the data has to be prepared and presented to the classifiers.
-	\subsection{Preparation of Data}
-	To classify the articles as accurately and fast as possible, the data has to be prepared in such way that it contains as much information as possible in a format as dense as possible. To achieve this, the articles were parsed into words with white-space as separator, then removed of all characters not found in the English alphabet, though keeping the '-' character. After that, the words were stemmed so that similar words would be on the same form, and not be seen as two different words. (E.g. "argued", "argues", "arguing" reduce to "argu".) When they had been stemmed, all so called stop words were removed (such as "a", "the", etc.)
-	\\\\
-	When the crawler was extracting articles, the crawler sometimes for various reasons failed to obtain the body text for some of the articles. The result was an empty field where all the body text would go. This was of course removed from the set of articles.
-	\subsection{Vocabulary}
-	To 
-	\subsection{Datatypes}
-	There are many different ways to represent a feature vector, and different classifiers might want it represented in different ways. We have chosen to investigate four different types of representations of the vocabulary. The different datatypes were
-	\begin{description}[noitemsep,nolistsep]
-		\item[Binary:]\ \\Does article contain word or not.
-		\item[Count:]\ \\How many times does article contain word.
-		\item[Normalized Count by article length:]\ \\ The Count array divided by the number of words in article (sum $<$ 1).
-		\item[Normalized Count by sum of Count:]\ \\ The Count array divided by the sum of the Count array (sum = 1). 
-	\end{description}
+A crawler was written and used that extracted articles from BBC\footnote{\url{http://www.bbc.com/}}. The crawler extracts which topic the article belongs to, which is written in the HTML-code of the page on BBC's articles. In total, about \texttt{--NUMBER--} articles where extracted under \texttt{--NUMBER--} different topics. This will be used as training and test data for the classifiers.
+\subsection{Coding}
+Pythons has been chosen as programming language to extend our knowledge and experience of implementing different types of classifiers with different classify-packages and further understand how the data has to be prepared and presented to the classifiers.
+\subsection{Preparation of Data}
+To classify the articles as accurately and fast as possible, the data has to be prepared in such way that it contains as much information as possible in a format as dense as possible. To achieve this, the articles were parsed into words with white-space as separator, then removed of all characters not found in the English alphabet, though keeping the '-' character. After that, the words were stemmed so that similar words would be on the same form, and not be seen as two different words. (E.g. "argued", "argues", "arguing" reduce to "argu".) When they had been stemmed, all so called stop words were removed (such as "a", "the", etc.)
+\subsection{Vocabulary}
+The vocabulary was built up by unique stemmed words from the training set which consisted of 66\% of all articles. By different pruning techniques the vocabulary could be reduced in size and keep only the most informative elements. For the feature selection two scoring functions were used, $\chi^2$ and \emph{ANOVA F-value}(Analys of Variance)[NEED REFERENCE!]. The vocabulary was pruned by taking the \emph{K} or a percentile of the best features.
+\subsection{Datatypes}
+There are many different ways to represent a feature vector, and different classifiers might want it represented in different ways. We have chosen to investigate four different types of representations of the vocabulary. The different datatypes were
+\begin{description}[noitemsep,nolistsep]
+\item[Binary:]\ \\Does article contain word or not.
+\item[Count:]\ \\How many times does article contain word.
+\item[Normalized Count by article length:]\ \\ The count array divided by the number of words in article (sum $<$ 1).
+\item[Normalized Count by sum of Count:]\ \\ The count array divided by the sum of the Count array (sum = 1). 
+\item[Mapped value from 0 to 1:]\ \\ $\frac{2c_i}{max(c)}$ where $c_i$ is the count of word $i$. 
+\item[Mapped value from -1 to 1:]\ \\ $\frac{2c_i}{max(c)}-1$ (IS THIS IMPLEMENTED YET!?!?!?!?!?!)
+\end{description}
 
-	\subsection{Classifiers}
-	In the Scikit-learn package\footnote{\url{http://scikit-learn.org/}} there are plenty of different classifiers, amongst them the four we want to investigate. The four classifiers we will be investigating are
-	\begin{itemize}[noitemsep,nolistsep]
-		\item Naïve Bayes: Bernoulli
-		\item Naïve Bayes: Multinomial
-		\item Support Vector machines (SVM)
-		\item Random forest 
-	\end{itemize}
+\subsection{Classifiers}
+In the Scikit-learn package\footnote{\url{http://scikit-learn.org/}} there are plenty of different classifiers, amongst them the four we want to investigate. The four classifiers we will be investigating are
+\begin{itemize}[noitemsep,nolistsep]
+\item Naïve Bayes: Bernoulli
+\item Naïve Bayes: Multinomial
+\item Support Vector machines (SVM)
+\item Random forest 
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%% DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ifnum\printdraft>0
-	\subsection{TODO}
-	\begin{itemize}
-		\item Started with Naïve Bayes Classifier
-		\item Downloaded about 200 articles to classify
-		\item Divided into 2/3 training set, 1/3 test set
-		\item Parsed the words, removed non-alphabetical letters, kept -
-		\item Stemmed the words in the array
-		\item Removed empty articles
-		\item Removed stop words (such as "a","the" and so on.)
-		\item Used information gain to sample a good feature vector smaller than the one used earlier.
-		\item Describe the different in-datatypes.
-	\end{itemize}
+\subsection{TODO}
+\begin{itemize}
+\item Started with Naïve Bayes Classifier
+\item Downloaded about 200 articles to classify
+\item Divided into 2/3 training set, 1/3 test set
+\item Parsed the words, removed non-alphabetical letters, kept -
+\item Stemmed the words in the array
+\item Removed empty articles
+\item Removed stop words (such as "a","the" and so on.)
+\item Used information gain to sample a good feature vector smaller than the one used earlier.
+\item Describe the different in-datatypes.
+\end{itemize}
 \fi
 %%%%%%%%%%%%%%%%%%%%% END OF DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%%
