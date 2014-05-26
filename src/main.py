@@ -37,7 +37,64 @@ def hasuniquemax(targetcount):
 	sortcount = sorted(targetcount, reverse=True)
 	return sortcount[0] != sortcount[1]
 
+def printSimilarityWrong(clfs, testtarget, predict, classifier):
+	clfcomb = 0
+	for i in range(len(clfs)):
+		clfcomb += i # Number of clf-combinations
+	total_both_wrong = [0]*clfcomb
+	similar_wrong = [0]*clfcomb
+	for i in range(len(testtarget)):
+		tmp_index = 0
+		for j in range(len(clfs)-1):
+			for k in range(j+1,len(clfs)):
+				if(predict[j][i] != testtarget[i] and predict[k][i] != testtarget[i]):
+					total_both_wrong[tmp_index] +=1
+				if (predict[j][i] != testtarget[i] or predict[k][i] != testtarget[i]) and predict[k][i] == predict[j][i]:
+					similar_wrong[tmp_index] +=1
+				tmp_index += 1
 
+	print("Similarities:")
+	tmp_index = 0
+	names = getClassifierName(classifier)
+	for i in range(len(clfs)-1):
+		for j in range(i+1,len(clfs)):
+			print("{0} for {1} - {2}".format((100.0*similar_wrong[tmp_index])/total_both_wrong[tmp_index],names[i],names[j]))
+			tmp_index += 1
+
+def plotConfusionMatrix(clfs,testtarget,winner,correct,total,utargets):
+	cm_count = confusion_matrix(testtarget, winner)
+	cm = cm_count
+	#cm = cm / cm.astype(np.float).sum(axis=1) # Normalized count for percentage
+	cm = [(1.0*x)/x.sum(axis=0) for x in cm]
+
+	# Add one more column and row with zeros and a "total" at diagonal
+	cm = np.append(cm,[[1] for x in xrange(len(cm))],1)
+	last_row = [0 for x in xrange(len(cm))]
+	last_row.append((1.0*correct)/total) # Percentage correct in right, down corner
+	cm = np.append(cm,[last_row],0)
+
+	cm_count = np.append(cm_count,[[x] for x in cm_count.sum(axis=1)],1)
+	last_row = [0 for x in xrange(len(cm_count))]
+	last_row.append(correct) # Total correct in right, down corner
+	cm_count = np.append(cm_count,[last_row],0)
+
+	# Show confusion matrix in a separate window
+	cax = pl.matshow(cm)
+	# Set count and percentage labels in plot
+	for j in xrange(len(cm)): 
+		for i in xrange(len(cm[0])):
+			pl.annotate("%d\n(%2.1f%%)" %(cm_count[j][i],100*cm[j][i]),xy=(i-1.0/2.5,j+1.0/7))
+	
+	# Add the Total-label
+	utargets.append('Total')
+
+	#pl.title('Confusion matrix')
+	pl.colorbar(cax)
+	pl.ylabel('True label')
+	pl.xlabel('Predicted label')
+	pl.xticks(np.arange(len(utargets)),utargets,rotation=70)
+	pl.yticks(np.arange(len(utargets)),utargets)
+	pl.show()
 
 def classify(classifier, datatype, pruned):
 	clfs = getClassifier(classifier)
@@ -78,8 +135,6 @@ def classify(classifier, datatype, pruned):
 		winner[i] = utargets[winidx]
 
 
-	# CALCULATING CORRECT, WRONG-SIMILARITIES AND CONFUSION MATRIX
-
 	# Calculate correctness and print
 	correct = 0
 	corrrect_clf = [0]*len(clfs)
@@ -91,72 +146,7 @@ def classify(classifier, datatype, pruned):
 				corrrect_clf[j] += 1
 
 	# Calculate how similar they vote wrong
-	clfcomb = 0
-	for i in range(len(clfs)):
-		clfcomb += i # Number of clf-combinations
-	total_wrong = [0]*clfcomb
-	total_both_wrong = [0]*clfcomb
-	similar_wrong = [0]*clfcomb
-	for i in range(len(testtarget)):
-		tmp_index = 0
-		for j in range(len(clfs)-1):
-			for k in range(j+1,len(clfs)):
-				if(predict[j][i] != testtarget[i] or predict[k][i] != testtarget[i]):
-					total_wrong[tmp_index] +=1
-				if(predict[j][i] != testtarget[i] and predict[k][i] != testtarget[i]):
-					total_both_wrong[tmp_index] +=1
-				if (predict[j][i] != testtarget[i] or predict[k][i] != testtarget[i]) and predict[k][i] == predict[j][i]:
-					similar_wrong[tmp_index] +=1
-				tmp_index += 1
-
-	#for i in xrange(clfcomb):
-#		print((1.0*similar_wrong[i])/total_wrong[i])
-	print("Similarities:")
-	tmp_index = 0
-	names = getClassifierName(classifier)
-	for i in range(len(clfs)-1):
-		for j in range(i+1,len(clfs)):
-			print("{0} for {1} - {2}".format((100.0*similar_wrong[tmp_index])/total_both_wrong[tmp_index],names[i],names[j]))
-			tmp_index += 1
-
-	# Make a confusion matrix
-	cm = confusion_matrix(testtarget, winner)
-	cm = cm / cm.astype(np.float).sum(axis=1)
-
-	# Add one more column and row with zeros and a "total" at diagonal
-	cm = np.append(cm,[[1] for x in xrange(len(cm))],1)
-	last_row = [0 for x in xrange(len(cm))]
-	last_row.append((1.0*correct)/total)
-	cm = np.append(cm,[last_row],0)
-
-	# Calculate number of classified values from percentage and overall total for class
-	annotate_count = [[0 for x in xrange(len(cm))] for x in xrange(len(cm))]
-	classcount = Counter(testtarget)
-	for j in xrange(len(cm)-1): 
-		for i in xrange(len(cm[0])-1):
-			annotate_count[j][i] = round(cm[j][i]*classcount.get(utargets[j]))
-			annotate_count[j][len(cm)-1] += annotate_count[j][i]
-		annotate_count[len(cm)-1][len(cm)-1] += annotate_count[j][j]
-
-	# Show confusion matrix in a separate window
-	cax = pl.matshow(cm)
-	# Set count and percentage labels in plot
-	for j in xrange(len(cm)): 
-		for i in xrange(len(cm[0])):
-			pl.annotate("%d\n(%2.1f%%)" %(annotate_count[j][i],100*cm[j][i]),xy=(i-1.0/2.5,j+1.0/7))
-	
-	# Add the Total-label
-	utargets.append('Total')
-
-	#pl.title('Confusion matrix')
-	pl.colorbar(cax)
-	pl.ylabel('True label')
-	pl.xlabel('Predicted label')
-	pl.xticks(np.arange(len(utargets)),utargets,rotation=70)
-	pl.yticks(np.arange(len(utargets)),utargets)
-
-
-	# END OF CALCULATING CORRECT, WRONG-SIMILARITIES AND CONFUSION MATRIX
+	printSimilarityWrong(clfs, testtarget, predict, classifier)
 
 	print("Correct: {0} - Total: {1} - Correctness: {2}".format(correct, total, (1.0*correct)/total))
 	if len(clfs) == 4:
@@ -164,7 +154,10 @@ def classify(classifier, datatype, pruned):
 		print("Multin -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[1], total, (1.0*corrrect_clf[1])/total))
 		print("RandFo -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[2], total, (1.0*corrrect_clf[2])/total))
 		print("SuppVM -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[3], total, (1.0*corrrect_clf[3])/total))
-	pl.show()
+
+	# Plot a confusion matrix
+	plotConfusionMatrix(clfs,testtarget,winner,correct,total,utargets)
+
 # end classify
 
 
