@@ -3,14 +3,14 @@ import pickle
 import glob
 import re
 from common import *
+from sklearn.preprocessing import Normalizer
 
 
 def make_data(type,pruned):
 	databinary = []
 	target = []
 	datacount = []
-	data_doclen_norm = []
-	data_count_norm = []
+
 	for f in glob.glob("../res/articles/" + type + "_data/*-articles.json"):
 		t = f.replace("-articles.json", "")
 		t = re.sub(r".*\/+","",t)
@@ -19,9 +19,14 @@ def make_data(type,pruned):
 		target.extend(o[0])
 		databinary.extend(o[1])
 		datacount.extend(o[2])
-		data_doclen_norm.extend(o[3])
-		data_count_norm.extend(o[4])
-	return (target, databinary, datacount, data_doclen_norm, data_count_norm)
+	norm = Normalizer(norm='l2')
+	data_float = [[float(x) for x in list] for list in datacount]
+	data_l2 = norm.transform(data_float)
+
+	eps = 0.0000001  # To avoid division by 0
+	data_mapped = [[x/(max(line)+eps) for x in line] for line in datacount]
+	
+	return (target, databinary, datacount, data_l2, data_mapped)
 # end make_data
 
 def makeCountArray(j,pruned):
