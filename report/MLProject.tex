@@ -29,7 +29,11 @@
 %%% USAGE IN TEXT:
 % 	\ifnum\printdraft>0
 % 		OUR DRAFT TEXT GOES HERE
-% 	\fi
+% 	\else
+%   \begin{center}
+%   	\textbf{--- DRAFT PARTS ---}
+%   \end{center}
+%   \fi
 %%%%%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%%%%%%%%%%%%%%%%%
 \linespread{1.0} % Line spacing
 
@@ -101,6 +105,10 @@ keepaspectratio]{img/uu-logo.pdf}}%
 %%%%%%%%%%%%%%%%%%%% DRAFT %%%%%%%%%%%%%%
 \ifnum\printdraft>0
 	\texttt{Some meta text here?}
+\else
+\begin{center}
+	\textbf{--- DRAFT PARTS ---}
+\end{center}
 \fi
 %%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
 \input{sections/theory.tex}
@@ -109,6 +117,10 @@ keepaspectratio]{img/uu-logo.pdf}}%
 %%%%%%%%%%%%%%%%%%%% DRAFT %%%%%%%%%%%%%%
 \ifnum\printdraft>0
 	\texttt{Some meta text here?}
+\else
+\begin{center}
+	\textbf{--- DRAFT PARTS ---}
+\end{center}
 \fi
 %%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
 \input{sections/method.tex}
@@ -117,6 +129,10 @@ keepaspectratio]{img/uu-logo.pdf}}%
 %%%%%%%%%%%%%%%%%%%% DRAFT %%%%%%%%%%%%%%
 \ifnum\printdraft>0
 	\texttt{Some meta text here?}
+\else
+\begin{center}
+	\textbf{--- DRAFT PARTS ---}
+\end{center}
 \fi
 %%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
 \input{sections/result.tex}
@@ -126,8 +142,6 @@ keepaspectratio]{img/uu-logo.pdf}}%
 
 \section{Conclusions \& Future work}
 \input{sections/conclusion.tex}
-
-There are many different methods of representing the data selecting features that can be investigated further. Term Frequency - Inverse Document Frequency (TF-IDF) is an interesting way of mapping the data so that terms that are unique for certain classes are emphasized.
 
 \bibliographystyle{plain}
 \bibliography{bibliography}

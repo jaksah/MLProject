@@ -1,5 +1,15 @@
 \subsection{News Crawler}
-A crawler was written and used that extracted articles from BBC\footnote{\url{http://www.bbc.com/}}. The crawler extracts the topic that the article belongs to, which is written in the HTML-code of the page on BBC's articles. In total, about \texttt{--NUMBER--} articles where extracted under \texttt{--NUMBER--} different topics. This will be used as training and test data for the classifiers.
+A crawler was written and used that extracted articles from BBC\footnote{\url{http://www.bbc.com/}}. The crawler extracts the topic that the article belongs to, which is written in the HTML-code of the page on BBC's articles. 
+%%%%%%%%%%%%%%%%%%%%%% DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifnum\printdraft>0
+	In total, about \texttt{--NUMBER--} articles where extracted under \texttt{--NUMBER--} different topics.
+\else
+\begin{center}
+  	\textbf{--- DRAFT PARTS ---}
+\end{center}
+\fi
+%%%%%%%%%%%%%%%%%%%%%% END OF DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%
+This will be used as training and test data for the classifiers.
 \subsection{Coding}
 Python has been chosen as programming language to extend our knowledge and experience of implementing different types of classifiers using the \texttt{scikit-learn} machine learning library in python and further understand how the data has to be prepared and presented to the classifiers.
 \subsection{Preparation of Data}
@@ -7,14 +17,22 @@ To classify the articles as accurately and fast as possible, the data has to be 
 \subsection{Vocabulary}
 The vocabulary was built up by unique stemmed words from the training set which consisted of 66\% of all articles. By different pruning techniques the vocabulary could be reduced in size and keep only the most informative elements. For the feature selection the score was determined by the $\chi^2$ function. The vocabulary was then pruned by selecting a percentile of the best features.
 \subsection{Datatypes}
-There are many different ways to represent a feature vector, and different classifiers might want it represented in different ways. We have chosen to investigate four different types of representations of the vocabulary. The different datatypes were
+There are many different ways to represent a feature vector, and different classifiers might want it represented in different ways. We have chosen to investigate a couple of different types of representations of the vocabulary. The different datatypes were
 \begin{description}[noitemsep,nolistsep]
 \item[Binary:]\ \\Does article contain word or not.
 \item[Count:]\ \\How many times does article contain word.
 \item[Normalized Count by article length:]\ \\ The count array divided by the number of words in article (sum $<$ 1).
 \item[Normalized Count by sum of Count:]\ \\ The count array divided by the sum of the Count array (sum = 1). 
-\item[Mapped value from 0 to 1:]\ \\ $\frac{2c_i}{max(c)}$ where $c_i$ is the count of word $i$. 
-\item[Mapped value from -1 to 1:]\ \\ $\frac{2c_i}{max(c)}-1$ (IS THIS IMPLEMENTED YET!?!?!?!?!?!)
+\item[Mapped value from 0 to 1:]\ \\ $\frac{2c_i}{max(c)}$ where $c_i$ is the count of word $i$.
+%%%%%%%%%%%%%%%%%%%%%% DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifnum\printdraft>0
+	\item[Mapped value from -1 to 1:]\ \\ $\frac{2c_i}{max(c)}-1$ (IS THIS IMPLEMENTED YET!?!?!?!?!?!)
+\else
+\begin{center}
+  	\textbf{--- DRAFT PARTS ---}
+\end{center}
+\fi
+%%%%%%%%%%%%%%%%%%%%%% END OF DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%
 \end{description}
 
 \subsection{Classifiers}
@@ -40,5 +58,9 @@ In the Scikit-learn package\footnote{\url{http://scikit-learn.org/}} there are p
 \item Used information gain to sample a good feature vector smaller than the one used earlier.
 \item Describe the different in-datatypes.
 \end{itemize}
+\else
+\begin{center}
+\textbf{--- DRAFT PARTS ---}
+\end{center}
 \fi
 %%%%%%%%%%%%%%%%%%%%% END OF DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%%
