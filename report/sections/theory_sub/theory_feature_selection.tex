@@ -1,0 +1,6 @@
+\subsection{Feature selection}
+Some features may provide more information than others in a classification task. Feature selection emphasizes those by pruning features with less information. One way of assigning a score to each feature is to use the $\chi^2$ function. The $\chi^2$ score for a feature is given by
+\[
+\chi^2 = \sum_i^N \sum_j^{n_i} \frac{\left ( O_{i,j} - E_i \right )}{E_i},
+\]
+where $N$ is the number of classes, $n_i$ the number of observations in class $i$, $O_{i,j}$ is the occurrence of the feature in observation $j$ of class $i$, and $E_i$ is the average occurrence of the feature in the observations of class $i$. 
