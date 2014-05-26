@@ -1,20 +1,17 @@
 \subsection{News Crawler}
-A crawler was written and used that extracted articles from BBC\footnote{\url{http://www.bbc.com/}}. The crawler extracts the topic that the article belongs to, which is written in the HTML-code of the page on BBC's articles. In total, about \texttt{--NUMBER--} articles where extracted under \texttt{--NUMBER--} different topics. This will be used as training and test data for the classifiers.
+A web crawler extracts articles from BBC\footnote{\url{http://www.bbc.com/}}, and the topic that the article belongs to, which is written in the HTML-code of the page on BBC's articles. In total, about \texttt{--NUMBER--} articles is extracted under \texttt{--NUMBER--} different topics. This is used as training and test data for the classifiers.
 \subsection{Coding}
-Python has been chosen as programming language to extend our knowledge and experience of implementing different types of classifiers using the \texttt{scikit-learn} machine learning library in python and further understand how the data has to be prepared and presented to the classifiers.
+Python is chosen as programming language in order to extend our knowledge and experience of implementing different types of classifiers using the \texttt{scikit-learn} machine learning library in python and further understand how the data has to be prepared and presented to the classifiers.
 \subsection{Preparation of Data}
-To classify the articles as accurately and fast as possible, the data has to be prepared in such way that it contains as much information as possible in a format as dense as possible. To achieve this, the articles were parsed into words with white-space as separator, then removed of all characters not found in the English alphabet, though keeping the '-' character. After that, the words were stemmed so that similar words would be on the same form, and not be seen as two different words. (E.g. "argued", "argues", "arguing" reduce to "argu".) When they had been stemmed, all so called stop words were removed (such as "a", "the", etc.). 
+To classify the articles as accurately and fast as possible, the data is prepared in such way that it contains as much information as possible in a format as dense as possible. To achieve this, the articles are parsed into words with white-space as separator, then removed of all characters not found in the English alphabet, though keeping the '-' character. The words are stemmed so that similar words would be on the same form, and not be seen as two different words. (E.g. "argued", "argues", "arguing" are reduced to "argu".) After stemming, all so called stop words are removed (such as "a", "the", etc.). 
 \subsection{Vocabulary}
-The vocabulary was built up by unique stemmed words from the training set which consisted of 66\% of all articles. By different pruning techniques the vocabulary could be reduced in size and keep only the most informative elements. For the feature selection the score was determined by the $\chi^2$ function. The vocabulary was then pruned by selecting a percentile of the best features.
+The vocabulary is built up by unique stemmed words from the training set which consists of 66\% of all articles. By different pruning techniques the vocabulary is reduced in size and only the most informative elements are kept. For the feature selection the score is determined by the $\chi^2$ function. The vocabulary is then pruned by selecting a percentile of the best features.
 \subsection{Datatypes}
-There are many different ways to represent a feature vector, and different classifiers might want it represented in different ways. We have chosen to investigate four different types of representations of the vocabulary. The different datatypes were
+There are various ways to represent a feature vector, and different classifiers might require different representations. Three different types of representations of the feature vectors are investigated, namely
 \begin{description}[noitemsep,nolistsep]
 \item[Binary:]\ \\Does article contain word or not.
 \item[Count:]\ \\How many times does article contain word.
-\item[Normalized Count by article length:]\ \\ The count array divided by the number of words in article (sum $<$ 1).
-\item[Normalized Count by sum of Count:]\ \\ The count array divided by the sum of the Count array (sum = 1). 
-\item[Mapped value from 0 to 1:]\ \\ $\frac{2c_i}{max(c)}$ where $c_i$ is the count of word $i$. 
-\item[Mapped value from -1 to 1:]\ \\ $\frac{2c_i}{max(c)}-1$ (IS THIS IMPLEMENTED YET!?!?!?!?!?!)
+\item[Normalized Count by L2 norm:]\ \\ The count array normalized by the L2 norm.
 \end{description}
 
 \subsection{Classifiers}
