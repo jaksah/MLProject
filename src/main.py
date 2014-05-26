@@ -65,17 +65,17 @@ def plotConfusionMatrix(clfs,testtarget,winner,correct,total,utargets):
 	cm_count = confusion_matrix(testtarget, winner)
 	cm = cm_count
 	#cm = cm / cm.astype(np.float).sum(axis=1) # Normalized count for percentage
-	cm = [(1.0*x)/x.sum(axis=0) for x in cm]
+	cm = [(100.0*x)/x.sum(axis=0) for x in cm]
 
 	# Add one more column and row with zeros and a "total" at diagonal
-	cm = np.append(cm,[[1] for x in xrange(len(cm))],1)
+	cm = np.append(cm,[[100] for x in xrange(len(cm))],1)
 	last_row = [0 for x in xrange(len(cm))]
-	last_row.append((1.0*correct)/total) # Percentage correct in right, down corner
+	last_row.append((100.0*correct)/total) # Percentage correct in right, down corner
 	cm = np.append(cm,[last_row],0)
 
 	cm_count = np.append(cm_count,[[x] for x in cm_count.sum(axis=1)],1)
 	last_row = [0 for x in xrange(len(cm_count))]
-	last_row.append(correct) # Total correct in right, down corner
+	last_row.append(1.0*correct) # Total correct in right, down corner
 	cm_count = np.append(cm_count,[last_row],0)
 
 	# Show confusion matrix in a separate window
@@ -83,7 +83,7 @@ def plotConfusionMatrix(clfs,testtarget,winner,correct,total,utargets):
 	# Set count and percentage labels in plot
 	for j in xrange(len(cm)): 
 		for i in xrange(len(cm[0])):
-			pl.annotate("%d\n(%2.1f%%)" %(cm_count[j][i],100*cm[j][i]),xy=(i-1.0/2.5,j+1.0/7))
+			pl.annotate("%d\n(%2.1f%%)" %(cm_count[j][i],cm[j][i]),xy=(i-1.0/2.5,j+1.0/7))
 	
 	# Add the Total-label
 	utargets.append('Total')
