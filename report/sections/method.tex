@@ -1,15 +1,16 @@
-\subsection{News Crawler}
-A crawler was written and used that extracted articles from BBC\footnote{\url{http://www.bbc.com/}}. The crawler extracts the topic that the article belongs to, which is written in the HTML-code of the page on BBC's articles. 
-%%%%%%%%%%%%%%%%%%%%%% DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ifnum\printdraft>0
-	In total, about \texttt{--NUMBER--} articles where extracted under \texttt{--NUMBER--} different topics.
-\else
-\begin{center}
-  	\textbf{--- DRAFT PARTS ---}
-\end{center}
-\fi
-%%%%%%%%%%%%%%%%%%%%%% END OF DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%
-This will be used as training and test data for the classifiers.
+\subsection{Data retrieval}
+A crawler was implemented to extract articles from BBC's RSS feed\footnote{\url{http://www.bbc.com/news/10628494}}. The crawler extracts the content of each article from eight different topics, namely
+\begin{itemize}[noitemsep,nolistsep]
+	\item Business
+	\item Education
+	\item Entertainment and Art
+	\item Health
+	\item Politics
+	\item Science and Environment
+	\item Sports
+	\item Technology.
+\end{itemize}
+A total of 693 articles were extracted. As training set 2/3 of the articles were randomly selected and the remaining 1/3 were used as test set. Notable is that the distribution of topics is not uniform since the RSS feeds of the topics are not updated equally frequent. 
 \subsection{Coding}
 Python is chosen as programming language in order to extend our knowledge and experience of implementing different types of classifiers using the \texttt{scikit-learn} machine learning library in python and further understand how the data has to be prepared and presented to the classifiers.
 \subsection{Preparation of Data}
@@ -22,17 +23,8 @@ There are many different ways to represent a feature vector, and different class
 \item[Binary:]\ \\Does article contain word or not.
 \item[Count:]\ \\How many times does article contain word.
 \item[Normalized Count by article length:]\ \\ The count array divided by the number of words in article (sum $<$ 1).
-\item[Normalized Count by sum of Count:]\ \\ The count array divided by the sum of the Count array (sum = 1). 
-\item[Mapped value from 0 to 1:]\ \\ $\frac{2c_i}{max(c)}$ where $c_i$ is the count of word $i$.
-%%%%%%%%%%%%%%%%%%%%%% DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ifnum\printdraft>0
-	\item[Mapped value from -1 to 1:]\ \\ $\frac{2c_i}{max(c)}-1$ (IS THIS IMPLEMENTED YET!?!?!?!?!?!)
-\else
-\begin{center}
-  	\textbf{--- DRAFT PARTS ---}
-\end{center}
-\fi
-%%%%%%%%%%%%%%%%%%%%%% END OF DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%
+\item[$L_2$-normalized:]\ \\ The count array normalized with the $L_2$ norm. 
+\item[Mapped value from 0 to 1:]\ \\ $\frac{c_i}{\max(c)}$ where $c_i$ is the count of word $i$.
 \end{description}
 
 \subsection{Classifiers}
@@ -48,15 +40,7 @@ In the Scikit-learn package\footnote{\url{http://scikit-learn.org/}} there are p
 \ifnum\printdraft>0
 \subsection{TODO}
 \begin{itemize}
-\item Started with Naïve Bayes Classifier
-\item Downloaded about 200 articles to classify
 \item Divided into 2/3 training set, 1/3 test set
-\item Parsed the words, removed non-alphabetical letters, kept -
-\item Stemmed the words in the array
-\item Removed empty articles
-\item Removed stop words (such as "a","the" and so on.)
-\item Used information gain to sample a good feature vector smaller than the one used earlier.
-\item Describe the different in-datatypes.
 \end{itemize}
 \else
 \begin{center}
