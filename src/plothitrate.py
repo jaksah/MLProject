@@ -1,8 +1,12 @@
 import csv
+import matplotlib as mpl
 import matplotlib.pyplot as plt
-
+font = {
+	'size'		: '20'}
+mpl.rc('font', **font)
 yber, ymulti, yrf, ysvm, yhybrid = [],[],[],[],[]
 x,x2,y1,y2,y3,y4,y5 = [],[],[],[],[],[],[]
+
 for i in range(1,5):
 	csv_reader = csv.reader(open('hitrate-vs-chi2-dt' + str(i) + '.csv'))
 	x,x2,y1,y2,y3,y4,y5 = [],[],[],[],[],[],[]
@@ -48,10 +52,10 @@ for i in range(len(y)):
 	plt.plot(x, y[i][2], 'kv-', label="L2-normalized")
 	plt.plot(x, y[i][3], 'k^-', label="0-1 mapped")
 	plt.xscale('log')
-	plt.xlabel("Vocabulary size")
-	plt.ylabel("Hit ratio")
+	plt.xlabel("Vocabulary size", fontsize=25)
+	plt.ylabel("Hit ratio", fontsize=25)
 	plt.title(titles[i])
-	plt.legend()
+	plt.legend(loc=2, prop={'size':14})
 	plt.ylim((0.40, 0.80))
 	#mng = plt.get_current_fig_manager()
 	#mng.frame.Maximize(True)
