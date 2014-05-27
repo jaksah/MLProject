@@ -15,7 +15,7 @@
 *.fls
 *.out
 *.toc
-*.pdf
+MLProject.pdf
 
 ## Intermediate documents:
 *.dvi
