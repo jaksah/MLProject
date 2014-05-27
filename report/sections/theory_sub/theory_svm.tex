@@ -1,2 +1,19 @@
 \subsection{Support Vector Machine Classifier}
-Support vector machine classifiers (SVM's) classifies data belonging to two classes by finding the hyperplane with the widest margin that separates the classes. The data vectors that restrict the margin of the hyperplane are referred to as support vectors. These also fully specify the decision function. Finding the optimal hyperplane is a maximization problem, where the objective function describes the width of the margin. The problem can be formulated using Lagrangian multipliers and is then solved using quadratic programming. An advantage with this approach is that the maximization problem is convex, meaning that the maximum found is guaranteed to be the global maximum. This requires, however, that the classes are linearly separable. If they are not, one can make use of a so called kernel function that maps the data onto a space in which the classes might be linearly separable. Support vector machines are suitable for problems with high dimensionality, but might perform badly if the number of samples is much smaller than the number of dimensions. \cite{Berwick03SVM}
+Support vector machine classifiers (SVM's) classifies data belonging to two classes $y_i = \pm 1$ by finding the hyperplane $\boldsymbol{w} \cdot \boldsymbol{x} + b = 0$ with the widest margin that separates the classes in the training data $\boldsymbol{x}_i$. $b$ is the hyperplane's offset from the origin, $\boldsymbol{x}$ are vectors located within the hyperplane and the normal to the hyperplane, and the weights $\boldsymbol{w}$ determine the orientation. The scale of $\boldsymbol{w}$ and $b$ is defined such that $\boldsymbol{w} \cdot \boldsymbol{x} + b = +1$ and $\boldsymbol{w} \cdot \boldsymbol{x} + b = -1$ for the vectors that restrict the margin of the hyperplane on the left and right side respectively. Those vectors are referred to as support vectors and they fully specify the decision function
+\[
+f(\boldsymbol{x}) = \text{sign}(\boldsymbol{w}\cdot \boldsymbol{x} + b).
+\]
+Finding the optimal hyperplane is a maximization problem, where the objective function describes the width of the margin $\frac{1}{||\boldsymbol{w}||_2}$, which is equivalent to minimizing $\frac{1}{2}||\boldsymbol{w}||_2^2$ subject to the constraints $y_i (\boldsymbol{w}\cdot \boldsymbol{x} + b)\leq 1, \forall i$. The problem can be formulated using Lagrangian multipliers $\alpha_i \geq 0$ into
+\[
+L(\boldsymbol{w},b) = \frac{1}{2}(\boldsymbol{w} \cdot \boldsymbol{w}) - \sum_i \alpha_i (y_i (\boldsymbol{w} \cdot \boldsymbol{x}_i + b) - 1).
+\]
+Using that the derivatives with respect to $\boldsymbol{w}$ and $b$ are zero at the minimum, we can express $\boldsymbol{w}$ in terms of $\boldsymbol{x}_i, \alpha_i$, and $y_i$ and then reformulate the problem into maximizing
+\begin{equation}
+W(\alpha) = \sum_i \alpha_i - \frac{1}{2} \sum_{i,j} \alpha_i \alpha_j y_i y_j (\boldsymbol{x}_i \cdot \boldsymbol{x}_j),
+\label{eq:wolfe}
+\end{equation}
+with respect to $\alpha_i$ and subject to the constraints
+\[
+\alpha_i \geq 0, \quad \sum_i \alpha_i y_i = 0,
+\]
+which is solved using quadratic programming. An advantage with SVMs is that the maximization problem is convex, meaning that the maximum found is guaranteed to be the global maximum. This requires, however, that the classes are linearly separable. If they are not, one can make use of a so called kernel function $\boldsymbol{\phi}(\boldsymbol{x})$ that maps the data onto a space in which the classes are linearly separable. This is done by substituting the dot product $\boldsymbol{x}_i \cdot \boldsymbol{x}_j$ in equation \eqref{eq:wolfe} with $\boldsymbol{\phi}(\boldsymbol{x}_i) \cdot \boldsymbol{\phi}(\boldsymbol{x}_j)$. Support vector machines are suitable for problems with high dimensionality, but might perform badly if the number of samples is much smaller than the number of dimensions. \cite{Campbell11SVM}
