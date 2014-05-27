@@ -3,7 +3,18 @@ Let $c$ be the class and $A = a_1, \dots ,a_n$ be the attributes of a document. 
 \begin{equation}
 p(c|A)=\frac{p(A|c)p(c)}{p(A)},
 \end{equation}
-the attributes $A$ is classified as class $C$ if and only if
+%%%%%%%%%%%%%% DRAFT PART %%%%%%%%%%%%%%%%%%%%
+\ifnum\printdraft>0
+	% Bör stora C vara lilla C?
+		%the attributes $A$ is classified as class $C$ if and only if
+	% Alltså:
+		the attributes $A$ is classified as class $c$ if and only if
+\else
+\begin{center}
+	\textbf{--- CORRECTION PARTS ---}
+\end{center}
+\fi
+%%%%%%%%%%%%%%%%%%%% END DRAFT PART %%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
 f_b(A)=\frac{p(c|A)}{p(\neg c|A)} \geq 1,
 \end{equation}
