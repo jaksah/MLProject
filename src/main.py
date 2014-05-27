@@ -73,50 +73,57 @@ def makeconfusionmatrix(correct, testtarget, total, utargets, winner):
 	pl.yticks(np.arange(len(utargets)), utargets)
 
 
-def classify(classifier, datatype, pruned):
-	clfs = getClassifier(classifier)
-	print clfs
+def missclassifysimilarity(clfs, predict, testtarget):
+	clfcomb = 0
+	for i in range(len(clfs)):
+		clfcomb += i  # Number of clf-combinations
+	total_wrong = [0] * clfcomb
+	total_both_wrong = [0] * clfcomb
+	similar_wrong = [0] * clfcomb
+	for i in range(len(testtarget)):
+		tmp_index = 0
+		for j in range(len(clfs) - 1):
+			for k in range(j + 1, len(clfs)):
+				if (predict[j][i] != testtarget[i] or predict[k][i] != testtarget[i]):
+					total_wrong[tmp_index] += 1
+				if (predict[j][i] != testtarget[i] and predict[k][i] != testtarget[i]):
+					total_both_wrong[tmp_index] += 1
+				if (predict[j][i] != testtarget[i] or predict[k][i] != testtarget[i]) and predict[k][i] == predict[j][i]:
+					similar_wrong[tmp_index] += 1
+				tmp_index += 1
 
-	train = make_data('training',pruned)
-	traintarget = train[0]
-	traindata = train[int(datatype)]
-
-	test = make_data('test',pruned)
-	testtarget = test[0]
-	testdata = test[int(datatype)]
-	ncorrect = [0]*len(clfs)
-	predict = [[0 for x in xrange(len(testdata))] for x in xrange(len(clfs))]
-	total = len(testdata)
-
-	# Predict for all classifiers
-	for c in range(0,len(clfs)):
-		clf = clfs[c]
-		clf.fit(traindata, traintarget)
-		for i in range(len(testdata)):
-			predict[c][i] = clf.predict(testdata[i])
-
-	# Check correctness
-	utargets = sorted(list(set(testtarget)))
-	ntargets = len(utargets)
-	winner = [0]*len(testtarget)
-	for i in range(len(testdata)):
-		targetcount = [0]*ntargets
-		for c in range(len(clfs)):
-			classpredicted = predict[c][i]
-			targetcount[utargets.index(classpredicted)]+=1
-		winidx = -1
-		if hasuniquemax(targetcount):
-			winidx = targetcount.index(max(targetcount))
-		else:
-			winidx = utargets.index(predict[1][i])  # Set default clf winner
-		winner[i] = utargets[winidx]
+			#for i in xrange(clfcomb):
+			#		print((1.0*similar_wrong[i])/total_wrong[i])
+	return similar_wrong, total_both_wrong
 
 
-	# CALCULATING CORRECT, WRONG-SIMILARITIES AND CONFUSION MATRIX
+def printsimilarities(classifier, clfs, similar_wrong, total_both_wrong):
+	print("Similarities:")
+	tmp_index = 0
+	names = getClassifierName(classifier)
+	for i in range(len(clfs) - 1):
+		for j in range(i + 1, len(clfs)):
+			print("{0} for {1} - {2}".format((100.0 * similar_wrong[tmp_index]) / total_both_wrong[tmp_index], names[i],
+											names[j]))
+			tmp_index += 1
 
-	# Calculate correctness and print
+
+def printcorrectness(clfs, correct, corrrect_clf, total):
+	print("Correct: {0} - Total: {1} - Correctness: {2}".format(correct, total, (1.0 * correct) / total))
+	if len(clfs) == 4:
+		print("Bernou -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[0], total,
+																			(1.0 * corrrect_clf[0]) / total))
+		print("Multin -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[1], total,
+																			(1.0 * corrrect_clf[1]) / total))
+		print("RandFo -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[2], total,
+																			(1.0 * corrrect_clf[2]) / total))
+		print("SuppVM -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[3], total,
+																			(1.0 * corrrect_clf[3]) / total))
+
+
+def calculatecorrectness(clfs, predict, testtarget, winner):
 	correct = 0
-	corrrect_clf = [0]*len(clfs)
+	corrrect_clf = [0] * len(clfs)
 	for i in range(len(testtarget)):
 		if testtarget[i] == winner[i]:
 			correct += 1
@@ -124,46 +131,73 @@ def classify(classifier, datatype, pruned):
 			if testtarget[i] == predict[j][i]:
 				corrrect_clf[j] += 1
 
-	# Calculate how similar they vote wrong
-	clfcomb = 0
-	for i in range(len(clfs)):
-		clfcomb += i # Number of clf-combinations
-	total_wrong = [0]*clfcomb
-	total_both_wrong = [0]*clfcomb
-	similar_wrong = [0]*clfcomb
-	for i in range(len(testtarget)):
-		tmp_index = 0
-		for j in range(len(clfs)-1):
-			for k in range(j+1,len(clfs)):
-				if(predict[j][i] != testtarget[i] or predict[k][i] != testtarget[i]):
-					total_wrong[tmp_index] +=1
-				if(predict[j][i] != testtarget[i] and predict[k][i] != testtarget[i]):
-					total_both_wrong[tmp_index] +=1
-				if (predict[j][i] != testtarget[i] or predict[k][i] != testtarget[i]) and predict[k][i] == predict[j][i]:
-					similar_wrong[tmp_index] +=1
-				tmp_index += 1
+	return correct, corrrect_clf
 
-	#for i in xrange(clfcomb):
-#		print((1.0*similar_wrong[i])/total_wrong[i])
-	print("Similarities:")
-	tmp_index = 0
-	names = getClassifierName(classifier)
-	for i in range(len(clfs)-1):
-		for j in range(i+1,len(clfs)):
-			print("{0} for {1} - {2}".format((100.0*similar_wrong[tmp_index])/total_both_wrong[tmp_index],names[i],names[j]))
-			tmp_index += 1
+
+def checkcorrectness(clfs, predict, testdata, testtarget):
+	utargets = sorted(list(set(testtarget)))
+	ntargets = len(utargets)
+	winner = [0] * len(testtarget)
+	for i in range(len(testdata)):
+		targetcount = [0] * ntargets
+		for c in range(len(clfs)):
+			classpredicted = predict[c][i]
+			targetcount[utargets.index(classpredicted)] += 1
+		winidx = -1
+		if hasuniquemax(targetcount):
+			winidx = targetcount.index(max(targetcount))
+		else:
+			winidx = utargets.index(predict[1][i])  # Set default clf winner
+		winner[i] = utargets[winidx]
+
+	return utargets, winner
+
+
+def predictforclassifiers(clfs, predict, testdata, traindata, traintarget):
+	for c in range(0, len(clfs)):
+		clf = clfs[c]
+		clf.fit(traindata, traintarget)
+		for i in range(len(testdata)):
+			predict[c][i] = clf.predict(testdata[i])
+
+
+def selecttrainandtestdata(datatype, pruned):
+	train = make_data('training', pruned)
+	traintarget = train[0]
+	traindata = train[int(datatype)]
+	test = make_data('test', pruned)
+	testtarget = test[0]
+	testdata = test[int(datatype)]
+	return testdata, testtarget, traindata, traintarget
+
+
+def classify(classifier, datatype, pruned):
+	clfs = getClassifier(classifier)
+	print clfs
+
+	testdata, testtarget, traindata, traintarget = selecttrainandtestdata(datatype, pruned)
+
+	ncorrect = [0]*len(clfs)
+	predict = [[0 for x in xrange(len(testdata))] for x in xrange(len(clfs))]
+	total = len(testdata)
+
+	# Predict for all classifiers
+	predictforclassifiers(clfs, predict, testdata, traindata, traintarget)
+	# Check correctness
+	utargets, winner = checkcorrectness(clfs, predict, testdata, testtarget)# CALCULATING CORRECT, WRONG-SIMILARITIES AND CONFUSION MATRIX
+
+	# Calculate correctness and print
+	correct, corrrect_clf = calculatecorrectness(clfs, predict, testtarget, winner)
+	# Calculate how similar they vote wrong
+	similar_wrong, total_both_wrong = missclassifysimilarity(clfs, predict, testtarget)
+	printsimilarities(classifier, clfs, similar_wrong, total_both_wrong)
 
 	makeconfusionmatrix(correct, testtarget, total, utargets, winner)
 
 
 	# END OF CALCULATING CORRECT, WRONG-SIMILARITIES AND CONFUSION MATRIX
 
-	print("Correct: {0} - Total: {1} - Correctness: {2}".format(correct, total, (1.0*correct)/total))
-	if len(clfs) == 4:
-		print("Bernou -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[0], total, (1.0*corrrect_clf[0])/total))
-		print("Multin -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[1], total, (1.0*corrrect_clf[1])/total))
-		print("RandFo -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[2], total, (1.0*corrrect_clf[2])/total))
-		print("SuppVM -- Correct: {0} - Total: {1} - Correctness: {2}".format(corrrect_clf[3], total, (1.0*corrrect_clf[3])/total))
+	printcorrectness(clfs, correct, corrrect_clf, total)
 	pl.show()
 # end classify
 
@@ -192,7 +226,7 @@ def main():
 		print(" ")
 		pruned = int(raw_input("Pruned vocabulary (1 or 0): "))
 
-	classify(clf, datatype, pruned)
+	classify(clf, datatype, int(pruned))
 
 # Standard boilerplate to call the main() function to begin
 # the program.
