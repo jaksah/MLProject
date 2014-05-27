@@ -64,7 +64,7 @@ def readWholeFileBernoulli(filename,target,pruned):
 		o_temp = [x*inv_doclen for x in o]
 		total_doclen_norm.append(o_temp)
 		
-		inv_omax = 1.0/max(o)
+		inv_omax = 1.0/(max(o)+0.0000000001)
 		o_temp = [x*inv_omax for x in o]
 		total_count_norm.append(o_temp)
 		

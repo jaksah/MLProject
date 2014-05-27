@@ -25,7 +25,7 @@ with open('vocabularyList', 'wb') as f:
 training_data = make_data('training',0)
 targets = training_data[0]
 samples = training_data[2]
-feature_selector = SelectPercentile(chi2,15)
+feature_selector = SelectPercentile(chi2,4)
 selected_samples = feature_selector.fit(samples,targets).get_support()
 
 pruned_vocabulary = []

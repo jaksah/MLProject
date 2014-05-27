@@ -96,6 +96,30 @@ def plotConfusionMatrix(clfs,testtarget,winner,correct,total,utargets):
 	pl.yticks(np.arange(len(utargets)),utargets)
 	pl.show()
 
+def printConfusionMatrix(testtarget,winner,predict, classifier,utargets):
+	names = getClassifierName(classifier)
+	cm_count = confusion_matrix(testtarget, winner)
+	print("hybrid = ["),
+	for x in xrange(len(cm_count)):
+		for y in cm_count[x]:
+			print("{0} ".format(y)),
+		print(";")
+	print("\b];")
+
+	for i in xrange(len(names)):
+		cm_count = confusion_matrix(testtarget, predict[i])
+		print("{0} = [".format(names[i])),
+		for x in xrange(len(cm_count)):
+			for y in cm_count[x]:
+				print("{0} ".format(y)),
+			print(";")
+		print("\b];")
+
+	print("names = ["),
+	for w in utargets:
+		print("'{0}',".format(w)),
+	print("\b];")
+
 def classify(classifier, datatype, pruned):
 	clfs = getClassifier(classifier)
 	print clfs
@@ -147,6 +171,9 @@ def classify(classifier, datatype, pruned):
 
 	# Calculate how similar they vote wrong
 	printSimilarityWrong(clfs, testtarget, predict, classifier)
+
+	# Print confusion matrix for matlab
+	printConfusionMatrix(testtarget,winner,predict, classifier,utargets)
 
 	print("Correct: {0} - Total: {1} - Correctness: {2}".format(correct, total, (1.0*correct)/total))
 	if len(clfs) == 4:
