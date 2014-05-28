@@ -16,7 +16,7 @@ Python is chosen as programming language in order to extend our knowledge and ex
 \subsection{Preparation of Data}
 To classify the articles as accurately and fast as possible, the data is prepared in such way that it contains as much information as possible in a format as dense as possible. To achieve this, the articles are parsed into words with white-space as separator, then removed of all characters not found in the English alphabet, though keeping the '-' character. The words are stemmed so that similar words would be on the same form, and not be seen as two different words. (E.g. "argued", "argues", "arguing" are reduced to "argu".) After stemming, all so called stop words are removed (such as "a", "the", etc.). 
 \subsection{Vocabulary}
-The vocabulary is built up by unique stemmed words from the training set which consists of 66\% of all articles. By different pruning techniques the vocabulary is reduced in size and only the most informative elements are kept. For the feature selection the score is determined by the $\chi^2$ function. The vocabulary is then pruned by selecting a percentile of the best features.
+The vocabulary is built up by unique stemmed words from the training set which consists of 2/3 of all articles. By different pruning techniques the vocabulary is reduced in size and only the most informative elements are kept. For the feature selection the score is determined by the $\chi^2$ function. The vocabulary is then pruned by selecting a percentile of the best features.
 \subsection{Datatypes}
 There are many different ways to represent a feature vector, and different classifiers might want it represented in different ways. We have chosen to investigate a couple of different types of representations of the vocabulary. The different datatypes were
 \begin{description}[noitemsep,nolistsep]
@@ -31,6 +31,23 @@ In the Scikit-learn package\footnote{\url{http://scikit-learn.org/}} there are p
 \begin{itemize}[noitemsep,nolistsep]
 \item Naïve Bayes: Bernoulli
 \item Naïve Bayes: Multinomial
-\item Support Vector machines (SVM)
-\item Random forest 
+\item Random Forest 
+\item Support Vector Machines (SVM)
 \end{itemize}
+
+\subsubsection{Bernoulli} % (fold)
+\label{ssub:bernoulli}
+\input{sections/method_subsub/method_sub_ber.tex}
+% subsubsection bernoulli (end)
+\subsubsection{Multinomial} % (fold)
+\label{ssub:multinomial}
+\input{sections/method_subsub/method_sub_mul.tex}
+% subsubsection multinomial (end)
+\subsubsection{Random Forest} % (fold)
+\label{ssub:random_forest}
+\input{sections/method_subsub/method_sub_rf.tex}
+% subsubsection random_forest (end)
+\subsubsection{Support Vector Machine} % (fold)
+\label{ssub:support_vector_machine}
+\input{sections/method_subsub/method_sub_svm.tex}
+% subsubsection support_vector_machine (end)
