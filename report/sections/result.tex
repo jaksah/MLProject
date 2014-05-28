@@ -9,7 +9,10 @@
 %%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
 
 Main focus of this report is to analyze, and compare between models, the performance impact of varying vocabulary size for different data types as well as difficulties of distinguishing the eight different topics. The result of the analysis can be seen in Figure \ref{fig:hitratio} \& \ref{fig:confmat} and Table \ref{tab:similarity}.\\\\
-Figure \ref{fig:hitratio} shows, for the different models and data types, the overall hit ratio of correct classification as a function of vocabulary size after $\chi^2$ pruning. Comparing the figures one can establish that the maximum accuracy of 76\% is attained with binary inputs by Multinomial at a vocabulary size of 1022 words. Another observation is that Bernoulli is sensitive to vocabulary size compared to other models and SVM seems in contrast to Bernoulli more robust to changes in vocabulary size. More results derived from these figures are that Random Forest is independent of the feature format and Hybrid follows the behaviour of Multinomial.
+Figure \ref{fig:hitratio} shows, for the different models and data types, the overall hit ratio of correct classification as a function of vocabulary size after $\chi^2$ pruning. Comparing the figures one can establish that the maximum accuracy of 76\% is attained with binary inputs by Multinomial at a vocabulary size of 1022 words. Another observation is that Bernoulli is sensitive to vocabulary size compared to other models and SVM seems in contrast to Bernoulli more robust to changes in vocabulary size. More results derived from these figures are that Random Forest is independent of the feature format and Hybrid follows the behaviour of Multinomial.\\\\
+
+
+In Table \ref{tab:similarity} a comparison of the similarity of prediction when misspredicting is shown. The values are resembles, given that both classifiers predicted wrong class, how many times they predicted the same class.
 
 \onecolumn
 \subsection{Hit Ratio}
