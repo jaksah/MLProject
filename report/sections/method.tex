@@ -22,18 +22,6 @@ There are many different ways to represent a feature vector, and different class
 \begin{description}[noitemsep,nolistsep]
 \item[Binary:]\ \\Does article contain word or not.
 \item[Count:]\ \\How many times does article contain word.
-
-%%%%%%%%%%%%%% DRAFT PART %%%%%%%%%%%%%%%%%%%%
-\ifnum\printdraft>0
-	% Bör denna vara med eller ej? (Vi kanske kan skriva den som en misslyckad data-typ?)
-	\item[Normalized Count by article length:]\ \\ The count array divided by the number of words in article (sum $<$ 1).
-\else
-\begin{center}
-	\textbf{--- CORRECTION PARTS ---}
-\end{center}
-\fi
-%%%%%%%%%%%%%%%%%%%% END DRAFT PART %%%%%%%%%%%%%%%%%%%%%%
-
 \item[$L_2$-normalized:]\ \\ The count array normalized with the $L_2$ norm. 
 \item[Mapped value from 0 to 1:]\ \\ $\frac{c_i}{\max(c)}$ where $c_i$ is the count of word $i$.
 \end{description}
@@ -46,16 +34,3 @@ In the Scikit-learn package\footnote{\url{http://scikit-learn.org/}} there are p
 \item Support Vector machines (SVM)
 \item Random forest 
 \end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%% DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ifnum\printdraft>0
-\subsection{TODO}
-\begin{itemize}
-\item Divided into 2/3 training set, 1/3 test set
-\end{itemize}
-\else
-\begin{center}
-\textbf{--- DRAFT PARTS ---}
-\end{center}
-\fi
-%%%%%%%%%%%%%%%%%%%%% END OF DRAFT PART %%%%%%%%%%%%%%%%%%%%%%%%%
