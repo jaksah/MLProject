@@ -16,14 +16,4 @@ with respect to $\alpha_i$ and subject to the constraints
 \[
 \alpha_i \geq 0, \quad \sum_i \alpha_i y_i = 0,
 \]
-which is solved using quadratic programming. An advantage with SVMs is that the maximization problem is convex, meaning that the maximum found is guaranteed to be the global maximum. This requires, however, that the classes are linearly separable. If they are not, one can make use of a so called kernel function $\boldsymbol{\phi}(\boldsymbol{x})$ that maps the data onto a space in which the classes are linearly separable. This is done by substituting the dot product $\boldsymbol{x}_i \cdot \boldsymbol{x}_j$ in equation \eqref{eq:wolfe} with $\boldsymbol{\phi}(\boldsymbol{x}_i) \cdot \boldsymbol{\phi}(\boldsymbol{x}_j)$.
-%%%%%%%%%%%%%% DRAFT PART %%%%%%%%%%%%%%%%%%%%
-\ifnum\printdraft>0
-	% Bör ändra badly to poorly? 
-	 Support vector machines are suitable for problems with high dimensionality, but might perform --->badly<--- if the number of samples is much smaller than the number of dimensions. \cite{Campbell11SVM}
-\else
-\begin{center}
-	\textbf{--- CORRECTION PARTS ---}
-\end{center}
-\fi
-%%%%%%%%%%%%%%%%%%%% END DRAFT PART %%%%%%%%%%%%%%%%%%%%%%
+which is solved using quadratic programming. An advantage with SVMs is that the maximization problem is convex, meaning that the maximum found is guaranteed to be the global maximum. This requires, however, that the classes are linearly separable. If they are not, one can make use of a so called kernel function $\boldsymbol{\phi}(\boldsymbol{x})$ that maps the data onto a space in which the classes are linearly separable. This is done by substituting the dot product $\boldsymbol{x}_i \cdot \boldsymbol{x}_j$ in equation \eqref{eq:wolfe} with $\boldsymbol{\phi}(\boldsymbol{x}_i) \cdot \boldsymbol{\phi}(\boldsymbol{x}_j)$. Support vector machines are suitable for problems with high dimensionality, but might perform poorly if the number of samples is much smaller than the number of dimensions. \cite{Campbell11SVM}
