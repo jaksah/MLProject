@@ -1,0 +1,96 @@
+% This file was created by matlab2tikz v0.4.3.
+% Copyright (c) 2008--2013, Nico Schlömer <nico.schloemer@gmail.com>
+% All rights reserved.
+% 
+% The latest updates can be retrieved from
+%   http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
+% where you can also make suggestions and rate matlab2tikz.
+% 
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=\figurewidth,
+height=\figureheight,
+scale only axis,
+xmin=0,
+xmax=503,
+xlabel={Number of articles in training data},
+ymin=0.5,
+ymax=0.8,
+ylabel={Hit ratio},
+title={Random Forest}
+]
+\addplot [
+color=black,
+solid,
+mark=square,
+mark options={solid},
+forget plot
+]
+table[row sep=crcr]{
+6 0.5281\\
+11 0.5714\\
+16 0.6017\\
+21 0.619\\
+41 0.6623\\
+81 0.658\\
+161 0.684\\
+322 0.645\\
+503 0.6494\\
+};
+\addplot [
+color=black,
+solid,
+mark=o,
+mark options={solid},
+forget plot
+]
+table[row sep=crcr]{
+6 0.5541\\
+11 0.5887\\
+16 0.6147\\
+21 0.619\\
+41 0.6623\\
+81 0.6623\\
+161 0.6537\\
+322 0.6537\\
+503 0.6364\\
+};
+\addplot [
+color=black,
+solid,
+mark=triangle,
+mark options={solid,,rotate=180},
+forget plot
+]
+table[row sep=crcr]{
+6 0.5368\\
+11 0.5974\\
+16 0.6234\\
+21 0.6407\\
+41 0.632\\
+81 0.645\\
+161 0.6364\\
+322 0.6407\\
+503 0.6277\\
+};
+\addplot [
+color=black,
+solid,
+mark=triangle,
+mark options={solid},
+forget plot
+]
+table[row sep=crcr]{
+6 0.5238\\
+11 0.5931\\
+16 0.6277\\
+21 0.6234\\
+41 0.6234\\
+81 0.6537\\
+161 0.645\\
+322 0.6407\\
+503 0.6407\\
+};
+\end{axis}
+\end{tikzpicture}%

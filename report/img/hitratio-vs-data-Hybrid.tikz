@@ -1,0 +1,101 @@
+% This file was created by matlab2tikz v0.4.3.
+% Copyright (c) 2008--2013, Nico Schlömer <nico.schloemer@gmail.com>
+% All rights reserved.
+% 
+% The latest updates can be retrieved from
+%   http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
+% where you can also make suggestions and rate matlab2tikz.
+% 
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=\figurewidth,
+height=\figureheight,
+scale only axis,
+xmin=0,
+xmax=503,
+xlabel={Number of articles in training data},
+ymin=0.5,
+ymax=0.8,
+ylabel={Hit ratio},
+title={Hybrid},
+legend style={at={(1.03,1)},anchor=north west,draw=black,fill=white,legend cell align=left}
+]
+\addplot [
+color=black,
+solid,
+mark=square,
+mark options={solid}
+]
+table[row sep=crcr]{
+6 0.6234\\
+11 0.6494\\
+16 0.6883\\
+21 0.7013\\
+41 0.7056\\
+81 0.7186\\
+161 0.7273\\
+322 0.7056\\
+503 0.7013\\
+};
+\addlegendentry{Binary};
+
+\addplot [
+color=black,
+solid,
+mark=o,
+mark options={solid}
+]
+table[row sep=crcr]{
+6 0.6537\\
+11 0.658\\
+16 0.697\\
+21 0.6926\\
+41 0.7143\\
+81 0.6883\\
+161 0.71\\
+322 0.7056\\
+503 0.7273\\
+};
+\addlegendentry{Count};
+
+\addplot [
+color=black,
+solid,
+mark=triangle,
+mark options={solid,,rotate=180}
+]
+table[row sep=crcr]{
+6 0.5931\\
+11 0.645\\
+16 0.6926\\
+21 0.697\\
+41 0.7143\\
+81 0.7229\\
+161 0.7186\\
+322 0.7186\\
+503 0.7229\\
+};
+\addlegendentry{L2-normalized};
+
+\addplot [
+color=black,
+solid,
+mark=triangle,
+mark options={solid}
+]
+table[row sep=crcr]{
+6 0.619\\
+11 0.6623\\
+16 0.7143\\
+21 0.7056\\
+41 0.7143\\
+81 0.7143\\
+161 0.7316\\
+322 0.7186\\
+503 0.7273\\
+};
+\addlegendentry{0-1 mapped};
+
+\end{axis}
+\end{tikzpicture}%

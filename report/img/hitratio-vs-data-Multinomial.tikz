@@ -1,0 +1,96 @@
+% This file was created by matlab2tikz v0.4.3.
+% Copyright (c) 2008--2013, Nico Schlömer <nico.schloemer@gmail.com>
+% All rights reserved.
+% 
+% The latest updates can be retrieved from
+%   http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
+% where you can also make suggestions and rate matlab2tikz.
+% 
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=\figurewidth,
+height=\figureheight,
+scale only axis,
+xmin=0,
+xmax=503,
+xlabel={Number of articles in training data},
+ymin=0.5,
+ymax=0.8,
+ylabel={Hit ratio},
+title={Multinomial}
+]
+\addplot [
+color=black,
+solid,
+mark=square,
+mark options={solid},
+forget plot
+]
+table[row sep=crcr]{
+6 0.6667\\
+11 0.7186\\
+16 0.7316\\
+21 0.7316\\
+41 0.7446\\
+81 0.7532\\
+161 0.7706\\
+322 0.7316\\
+503 0.7229\\
+};
+\addplot [
+color=black,
+solid,
+mark=o,
+mark options={solid},
+forget plot
+]
+table[row sep=crcr]{
+6 0.6883\\
+11 0.7013\\
+16 0.7186\\
+21 0.7273\\
+41 0.7403\\
+81 0.7186\\
+161 0.7489\\
+322 0.7359\\
+503 0.7446\\
+};
+\addplot [
+color=black,
+solid,
+mark=triangle,
+mark options={solid,,rotate=180},
+forget plot
+]
+table[row sep=crcr]{
+6 0.5844\\
+11 0.6407\\
+16 0.6753\\
+21 0.684\\
+41 0.7013\\
+81 0.6883\\
+161 0.6883\\
+322 0.6883\\
+503 0.6926\\
+};
+\addplot [
+color=black,
+solid,
+mark=triangle,
+mark options={solid},
+forget plot
+]
+table[row sep=crcr]{
+6 0.645\\
+11 0.6883\\
+16 0.7359\\
+21 0.7316\\
+41 0.7489\\
+81 0.7446\\
+161 0.7359\\
+322 0.7186\\
+503 0.7273\\
+};
+\end{axis}
+\end{tikzpicture}%

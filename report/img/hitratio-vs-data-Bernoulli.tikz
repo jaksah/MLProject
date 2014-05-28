@@ -1,0 +1,96 @@
+% This file was created by matlab2tikz v0.4.3.
+% Copyright (c) 2008--2013, Nico Schlömer <nico.schloemer@gmail.com>
+% All rights reserved.
+% 
+% The latest updates can be retrieved from
+%   http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
+% where you can also make suggestions and rate matlab2tikz.
+% 
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=\figurewidth,
+height=\figureheight,
+scale only axis,
+xmin=0,
+xmax=503,
+xlabel={Number of articles in training data},
+ymin=0.5,
+ymax=0.8,
+ylabel={Hit ratio},
+title={Bernoulli}
+]
+\addplot [
+color=black,
+solid,
+mark=square,
+mark options={solid},
+forget plot
+]
+table[row sep=crcr]{
+6 0.5325\\
+11 0.6147\\
+16 0.632\\
+21 0.6407\\
+41 0.6537\\
+81 0.6753\\
+161 0.6797\\
+322 0.671\\
+503 0.671\\
+};
+\addplot [
+color=black,
+solid,
+mark=o,
+mark options={solid},
+forget plot
+]
+table[row sep=crcr]{
+6 0.5325\\
+11 0.6147\\
+16 0.632\\
+21 0.6407\\
+41 0.6537\\
+81 0.6753\\
+161 0.6797\\
+322 0.671\\
+503 0.671\\
+};
+\addplot [
+color=black,
+solid,
+mark=triangle,
+mark options={solid,,rotate=180},
+forget plot
+]
+table[row sep=crcr]{
+6 0.5325\\
+11 0.6147\\
+16 0.632\\
+21 0.6407\\
+41 0.6537\\
+81 0.6753\\
+161 0.6797\\
+322 0.671\\
+503 0.671\\
+};
+\addplot [
+color=black,
+solid,
+mark=triangle,
+mark options={solid},
+forget plot
+]
+table[row sep=crcr]{
+6 0.5325\\
+11 0.6147\\
+16 0.632\\
+21 0.6407\\
+41 0.6537\\
+81 0.6753\\
+161 0.6797\\
+322 0.671\\
+503 0.671\\
+};
+\end{axis}
+\end{tikzpicture}%

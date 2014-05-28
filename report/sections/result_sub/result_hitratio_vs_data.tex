@@ -1,0 +1,41 @@
+\setlength\figureheight{0.25\linewidth}
+\setlength\figurewidth{0.35\linewidth}
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{\figwidth}
+		\tikzstyle{every node}=[font=\scriptsize]
+		\input{img/hitratio-vs-data-Bernoulli.tikz}
+		\caption{Hit ratio of Bernoulli classifier with varying number of articles in training data. All values greater than zero is mapped to one, hence the different data types result in same accuracy.}
+		\label{fig:hitratio-data-nb}
+	\end{subfigure}
+	~
+	\begin{subfigure}[b]{\figwidth}
+		\tikzstyle{every node}=[font=\scriptsize]
+		\input{img/hitratio-vs-data-Multinomial.tikz}
+		\caption{Hit ratio of Multinomial classifier with varying number of articles in training data.\\\ \\\ }
+		\label{fig:hitratio-data-mn}
+	\end{subfigure}
+	\\
+	\begin{subfigure}[b]{\figwidth}
+		\tikzstyle{every node}=[font=\scriptsize]
+		\input{img/hitratio-vs-data-RandomForest.tikz}
+		\caption{Hit ratio of Random Forest classifier with varying number of articles in training data.}
+		\label{fig:hitratio-data-rf}
+	\end{subfigure}
+	~
+	\begin{subfigure}[b]{\figwidth}
+		\tikzstyle{every node}=[font=\scriptsize]
+		\input{img/hitratio-vs-data-SVM.tikz}
+		\caption{Hit ratio of SVM classifier with varying number of articles in training data.}
+		\label{fig:hitratio-data-svm}
+	\end{subfigure}
+	\\
+	\begin{subfigure}[b]{\figwidth}
+		\tikzstyle{every node}=[font=\scriptsize]
+		\input{img/hitratio-vs-data-Hybrid.tikz}
+		\caption{Hit ratio of Hybrid classifier with varying number of articles in training data.}
+		\label{fig:hitratio-data-hybrid}
+	\end{subfigure}
+	\caption{Hit ratio vs number of articles in training data.}
+	\label{fig:hitratio}
+\end{figure}
