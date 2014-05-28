@@ -1,3 +1,12 @@
+%%%%%%%%%%%%%%%%%%%% DRAFT %%%%%%%%%%%%%%
+\ifnum\printdraft>0
+	\texttt{Some meta text here?}
+\else
+\begin{center}
+	\textbf{--- DRAFT PARTS ---}
+\end{center}
+\fi
+%%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
 \subsection{Data retrieval}
 A crawler was implemented to extract articles from BBC's RSS feed\footnote{\url{http://www.bbc.com/news/10628494}}. The crawler extracts the content of each article from eight different topics, namely
 \begin{itemize}[noitemsep,nolistsep]

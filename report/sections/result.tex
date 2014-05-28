@@ -1,6 +1,15 @@
+%%%%%%%%%%%%%%%%%%%% DRAFT %%%%%%%%%%%%%%
 \ifnum\printdraft>0
-	Write some introducing text about result here.
+	\texttt{Some meta text here?}
+\else
+\begin{center}
+	\textbf{--- DRAFT PARTS ---}
+\end{center}
 \fi
+%%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
+
+Main focus of this report is to analyze, and compare between models, the performance impact of varying vocabulary size for different data types as well as difficulties of distinguish the eight different topics. The result of the analysis can be seen in Figure \ref{fig:hitratio} \& \ref{fig:confmat} and Table \ref{tab:similarity}.\\\\
+Figure \ref{fig:hitratio} shows, for the different models and data types, the overall hit ratio of correct classification as a function of vocabulary size after $\chi^2$ pruning. Comparing the figures one can establish that the maximum accuracy of 76\% is attained with binary inputs by Multinomial at a vocabulary size of 1022 words.
 
 \onecolumn
 \subsection{Hit Ratio}
