@@ -1,20 +1,9 @@
-\subsection{Naive Bayes classifier}
+\subsection{Naïve Bayes classifier}
 Let $c$ be the class and $A = a_1, \dots ,a_n$ be the attributes of a document. Then with Bayes Theorem
 \begin{equation}
 p(c|A)=\frac{p(A|c)p(c)}{p(A)},
 \end{equation}
-%%%%%%%%%%%%%% DRAFT PART %%%%%%%%%%%%%%%%%%%%
-\ifnum\printdraft>0
-	% Bör stora C vara lilla C?
-		%the attributes $A$ is classified as class $C$ if and only if
-	% Alltså:
-		the attributes $A$ is classified as class $c$ if and only if
-\else
-\begin{center}
-	\textbf{--- CORRECTION PARTS ---}
-\end{center}
-\fi
-%%%%%%%%%%%%%%%%%%%% END DRAFT PART %%%%%%%%%%%%%%%%%%%%%%
+the attributes $A$ is classified as class $c$ if and only if
 \begin{equation}
 f_b(A)=\frac{p(c|A)}{p(\neg c|A)} \geq 1,
 \end{equation}
@@ -26,5 +15,6 @@ the final classifier can be written as
 \begin{equation}
 f_{nb}(A) = \frac{p(c)}{p(\neg c)}\prod_{i=1}^n\frac{p(a_i|c)}{p(a_i|\neg c)}
 \end{equation}
-where $f_{nb}$ is called the \emph{Naive Bayesian} (NB) classifier and is a binary classifier,  \\\\
-Two models that uses the Naive Bayes assumption are the \emph{multi-variate Bernoulli} model and the \emph{multinomial} model. The main difference is that they are different assumptions regarding the distribution of $p(a_i|c)$. In the Bernoulli model the attributes are binary, indicating if a word from a vocabulary has occurred at least once or not. In the multinomial model the frequency of words are taken into account.
+where $f_{nb}$ is called the \emph{Naïve Bayesian} (NB) classifier and is a binary classifier,  \\\\
+Two models that uses the Naïve Bayes assumption are the \emph{multi-variate Bernoulli} model and the \emph{multinomial} model. The main difference is that they use different assumptions regarding the distribution of $p(a_i|c)$. In the Bernoulli model the attributes are binary, indicating if a word from a vocabulary has occurred at least once or not. In the multinomial model the frequency of words are taken into account.\\\\
+Vilken fördelning alla features antas vara. Antagandet separerar de olika dimensionerna och kan oberoende av varandra estimera en endimensionell distribution. Det 
