@@ -3,7 +3,7 @@ from makeVocabulary import *
 import sys
 
 
-def printcorrectnessascsv(correct, corrrect_clf, total, chi2, vocsize):
+def printcorrectnessascsv(correct, corrrect_clf, total, dataAmount, vocsize):
 	hybridCorr = correct
 	hybridHitRate = (1.0 * correct) / total
 	bernouCorr = corrrect_clf[0]
@@ -15,12 +15,10 @@ def printcorrectnessascsv(correct, corrrect_clf, total, chi2, vocsize):
 	svmCorr = corrrect_clf[3]
 	svmHitRate = (1.0 * corrrect_clf[3]) / total
 
-	print("%2.2f,%d,%d,%d,%d,%d,%d,%d,%1.4f,%1.4f,%1.4f,%1.4f,%1.4f" % (chi2, vocsize, total, bernouCorr, multiCorr, randFoCorr, svmCorr, hybridCorr, bernouHitRate, multiHitRate, randFoHitRate, svmHitRate, hybridHitRate))
+	print("%2.2f,%d,%d,%d,%d,%d,%d,%d,%1.4f,%1.4f,%1.4f,%1.4f,%1.4f" % (dataAmount, vocsize, total, bernouCorr, multiCorr, randFoCorr, svmCorr, hybridCorr, bernouHitRate, multiHitRate, randFoHitRate, svmHitRate, hybridHitRate))
 
 
-def hitratevschi2(classifier, datatype, pruned, chi2):
-	# Create new vocabularies
-	makeVocabulary(chi2)
+def hitratevsdata(classifier, datatype, pruned, dataAmount):
 
 	clfs = getClassifier(classifier)
 
@@ -44,7 +42,7 @@ def hitratevschi2(classifier, datatype, pruned, chi2):
 	# makeconfusionmatrix(correct, testtarget, total, utargets, winner)
 
 	# END OF CALCULATING CORRECT, WRONG-SIMILARITIES AND CONFUSION MATRIX
-	printcorrectnessascsv(correct, corrrect_clf, total, chi2, vocsize)
+	printcorrectnessascsv(correct, corrrect_clf, total, dataAmount, vocsize)
 	# printcorrectness(clfs, correct, corrrect_clf, total)
 	# pl.show()
 
@@ -54,5 +52,5 @@ if __name__ == '__main__':
 		clf = sys.argv[1]
 		datatype = sys.argv[2]
 		pruned = sys.argv[3]
-		chi2 = sys.argv[4]
-	hitratevschi2(clf, datatype, int(pruned), float(chi2))
+		dataAmount = sys.argv[4]
+	hitratevsdata(clf, datatype, int(pruned), float(dataAmount))
