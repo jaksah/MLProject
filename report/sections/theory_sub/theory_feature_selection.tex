@@ -1,6 +1,9 @@
 \subsection{Feature selection}
-Some features may provide more information than others in a classification task. Feature selection emphasizes those features by pruning features with less information. One way of assigning a score to each feature is to use the $\chi^2$ function. The $\chi^2$ score for a feature is given by
+Features that provide more information than others can be emphasized by feature selection. One way of assigning a score to each feature is to use the $\chi^2$ function, which is a measure of how independent a feature is of the classes. The lower the score, the more independent is the feature of the classes. Features with high scores are therefore desired. The $\chi^2$ score for a feature is given by
 \[
-\chi^2 = \sum_i^N \sum_j^{n_i} \frac{\left ( O_{i,j} - E_i \right )^2}{E_i},
+\chi^2 = \sum_{i=1}^{N_s} \sum_{j=1}^{N_f} \frac{\left ( O_{i,j} - E_{i,j} \right )^2}{E_{i,j}},
 \]
-where $N$ is the number of classes, $n_i$ the number of observations in class $i$, $O_{i,j}$ is the frequency of the feature in observation $j$ of class $i$, and $E_i$ is the average frequency of the feature in the observations of class $i$. 
+where $N_s$ is the number of samples, $N_f$ the number of features, $O_{i,j}$ is the count of feature $j$ in sample $i$, and $E_{i,j}$ is the expected count, given by
+\[
+E_{i,j} = \left ( \sum_{n_f=1}^{N_f} O_{i,n_f} \right ) \cdot \left ( \sum_{n_s=1}^{N_s} O_{n_s,j} \right ).
+\]
