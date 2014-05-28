@@ -15,6 +15,6 @@ the final classifier can be written as
 \begin{equation}
 f_{nb}(A) = \frac{p(c)}{p(\neg c)}\prod_{i=1}^n\frac{p(a_i|c)}{p(a_i|\neg c)}
 \end{equation}
-where $f_{nb}$ is called the \emph{Naïve Bayesian} (NB) classifier and is a binary classifier,  \\\\
-Two models that uses the Naïve Bayes assumption are the \emph{multi-variate Bernoulli} model and the \emph{multinomial} model. The main difference is that they use different assumptions regarding the distribution of $p(a_i|c)$. In the Bernoulli model the attributes are binary, indicating if a word from a vocabulary has occurred at least once or not. In the multinomial model the frequency of words are taken into account.\\\\
-Vilken fördelning alla features antas vara. Antagandet separerar de olika dimensionerna och kan oberoende av varandra estimera en endimensionell distribution. Det 
+where $f_{nb}$ is called the \emph{Naïve Bayesian} (NB) classifier and is a binary classifier.\\\\
+The assumption that, given a class the attributes are independent, means that the distributions of each attribute can be estimated as a one dimensional distribution. This reduces the effect of the curse of dimensionality.\cite{Zhang04optimality}\\\\
+Two models that uses the Naïve Bayes assumption are the \emph{multi-variate Bernoulli} model and the \emph{multinomial} model. The main difference is that they use different assumptions regarding the distribution of $p(a_i|c)$. In the Bernoulli model the attributes are binary, indicating if a word from a vocabulary has occurred at least once or not, i.e. $p(a_i|c)$ has a Bernoulli distribution\footnote{\url{http://mathworld.wolfram.com/BernoulliDistribution.html}}. In the multinomial model the frequency of words are taken into account. This leads to a multinomial distribution\footnote{\url{http://mathworld.wolfram.com/MultinomialDistribution.html}} of $p(a_i|c)$.\cite{McCallum98acomparison}
