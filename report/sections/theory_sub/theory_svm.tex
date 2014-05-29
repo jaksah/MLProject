@@ -1,6 +1,6 @@
-\subsection{\svm\ Classification}
+\subsection{\svm\ Classifier}
 \label{sec:theory_svm}
-\svm\ (SVMs) classifies data belonging to two classes $y_i = \pm 1$ by finding the hyperplane $\boldsymbol{w} \cdot \boldsymbol{x} + b = 0$ with the widest margin that separates the classes in the training data $\boldsymbol{x}_i$. The constant $b$ is the hyperplane's offset from the origin, $\boldsymbol{x}$ are vectors located within the hyperplane and the normal to the hyperplane, and the weights $\boldsymbol{w}$ determine the orientation. The scale of $\boldsymbol{w}$ and $b$ is defined such that $\boldsymbol{w} \cdot \boldsymbol{x} + b = +1$ and $\boldsymbol{w} \cdot \boldsymbol{x} + b = -1$ for the vectors that restrict the margin of the hyperplane on the left and right side respectively. Those vectors are referred to as support vectors and they fully specify the decision function
+\svm s (SVMs) classify data belonging to two classes $y_i = \pm 1$ by finding the hyperplane $\boldsymbol{w} \cdot \boldsymbol{x} + b = 0$ with the widest margin that separates the classes in the training data $\boldsymbol{x}_i$. The constant $b$ is the hyperplane's offset from the origin, $\boldsymbol{x}$ are vectors located within the hyperplane and the normal to the hyperplane, and the weights $\boldsymbol{w}$ determine the orientation. The scale of $\boldsymbol{w}$ and $b$ is defined such that $\boldsymbol{w} \cdot \boldsymbol{x} + b = +1$ and $\boldsymbol{w} \cdot \boldsymbol{x} + b = -1$ for the vectors that restrict the margin of the hyperplane on the left and right side respectively. Those vectors are referred to as support vectors and they fully specify the decision function
 \[
 f(\boldsymbol{x}) = \text{sign}(\boldsymbol{w}\cdot \boldsymbol{x} + b).
 \]
