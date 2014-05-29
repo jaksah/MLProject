@@ -14,6 +14,14 @@ The \rf\ classifier splits the data into two parts in each node depending on thr
 One of the reason to why the \rf\ classifier tends to classify too many as Sports is that \rf\ is sensitive to imbalanced training data, i.e., not having the same amount of training data for each class. In our case, we have more articles of the class Sports, and less of Politics and Health. The classification in Figure \ref{fig:confmat} follows this reasoning and shows that Sports was classified 50 \% more than there are Sports articles, while Politics and Health were classified 23 \% respectively 42 \% less than there are articles of those classes.
 % subsection temp_random_forest_need_balanced_data (end)
 
+\subsection{TEMP: Hybrid follows Multinomial due to default} % (fold)
+\label{sub:temp_hybrid_follows_multinomial_due_to_default}
+In Figure \ref{fig:hitratio} \& \ref{fig:confmat} we can see that the \hy\ classifier follows the trend of \mn, which is due to the fact that \mn\ is set as default in case of a tie in the voting.
+% subsection temp_hybrid_follows_multinomial_due_to_default (end)
+
+\subsection{Feature Selection}
+The feature selection used is based on a statistical approach; the features that are statistically dependent of the classes are rewarded a high score and are therefore kept. This is reasonable since the features that are independent of the classes does not contribute with information to the classification. It does not, however, take feature interaction into account. It might be the case that a group of features with lower scores might give more information than a feature with a high score. 
+
 \subsection{Hit ratio vs number of articles in training set}
 As illustrated in Figure \ref{fig:hitratio-data}, the hit ratio as a function of articles in the training set has a similar behavior for all the classifiers. In general, there is an increase of the hit ratio between zero and 100 articles, and for more than 100 articles the hit ratio is constant or decreases slightly. The hit ratio peak is reached for a relatively small number of articles, considering that there are eight different article classes. This could be explained by the fact that all the articles are from the same time, and therefore cover very similar or the same events. If all articles contain very distinguishing features, these features will be found even in a small subset of the training data.
 
@@ -21,11 +29,6 @@ As illustrated in Figure \ref{fig:hitratio-data}, the hit ratio as a function of
 %\label{sub:temp_why_do_we_only_need_like_50_articles_to_get_a_good_classification_}
 %We can see in Figure \ref{fig:hitratio-data} that by after training on just 50 articles the classifiers were able to get a good hit ratio. This might be due to the fact that each article contains lots of words, which will be enough to get a reasonable hit ratio on the test set. Another reason might be that the articles are crawled very close to each other, so that articles might be about similar news, using similar words.
 % subsection temp_why_do_we_only_need_like_50_articles_to_get_a_good_classification_ (end)
-
-\subsection{TEMP: Hybrid follows Multinomial due to default} % (fold)
-\label{sub:temp_hybrid_follows_multinomial_due_to_default}
-In Figure \ref{fig:hitratio} \& \ref{fig:confmat} we can see that the \hy\ classifier follows the trend of \mn, which is due to the fact that \mn\ is set as default in case of a tie in the voting.
-% subsection temp_hybrid_follows_multinomial_due_to_default (end)
 
 \subsection{TEMP: Similarities between Tech / Science and Business / Education} % (fold)
 \label{sub:temp_similarities_between_tech_science_and_business_education}
@@ -41,7 +44,3 @@ If we compare recognition of handwritten letters done by humans and computers, w
 \\\\
 It would be interesting to see how the hit ratio would turn out if a human was to classify 100 articles from these eight topics. 
 % subsection temp_hard_to_classify_for_person (end)
-
-\subsection{Feature Selection}
-The feature selection used is based on a statistical approach; the features that are statistically dependent of the classes are rewarded a high score and are therefore kept. This is reasonable since the features that are independent of the classes does not contribute with information to the classification. It does not, however, take feature interaction into account. It might be the case that a group of features with lower scores might give more information than a feature with a high score. 
-
