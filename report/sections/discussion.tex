@@ -2,7 +2,7 @@
 \ifnum\printdraft>0
 	\begin{itemize}
 		%\item Random forest is sensitive to uneven spread of data between topics. Probably needs same amount of each
-		\item SVM handles increase in vocabulary size well. Should be resistant to high dimensionality.Feedback to theory.
+		%\item SVM handles increase in vocabulary size well. Should be resistant to high dimensionality.Feedback to theory.
 		\item Why might sport and education be easy?
 		%\item Hybrid follows Multinomial since it's the default.
 		\item Similarities between Tech / Science and Business / Education
@@ -17,20 +17,16 @@
 \end{center}
 \fi
 %%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
-Interesting results and aspects of the report will be discussed further under this section, where we will give our analysis and input on \emph{why} we think the results turned out how they did. Later, under section \ref{sec:conc_future}, conclusions will be drawn, along with suggestions on what future projects should focus upon.
+Interesting results and aspects of the report will be discussed further under this section, where we will give our analysis and input on \emph{why} we think the results turned out how they did. Later, under Section \ref{sec:conc_future}, conclusions will be drawn, along with suggestions on what future projects should focus upon.
 
 \subsection{TEMP: Similarities between Tech / Science and Business / Education} % (fold)
 \label{sub:temp_similarities_between_tech_science_and_business_education}
-Yeeeah!
+As stated in Section \ref{sec:result} the topics Technology and Science \& Environment has a tendency of getting mixed up by all classifiers. This is not a big surprise since in nature these two topics are closely related, e.g., an article about a new technology that reduces the environmental footprint at a technology cooperation could legitimately be classified as either of the two topics.\\\\
+Why Sports is easy to classify may depend on the fact that we attained more articles about Sports than any other topic which made the classifiers have a prior probability to predict Sports but also more data to classify it with. Sports also uses a quite unique vocabulary compared to other topics since Sports articles' target audience is those who are already interested in the topic in contrast to other topics which aims to reach as big audience as possible.
 % subsection temp_similarities_between_tech_science_and_business_education (end)
 
-\subsection{TEMP: Why might sport and education be easy?} % (fold)
-\label{sub:temp_why_might_sport_and_education_be_easy_}
-Cuz such cool.
-% subsection temp_why_might_sport_and_education_be_easy_ (end)
-
 \subsection{TEMP: SVM handles increase in vocabulary size well} % (fold)
-In Figure \ref{fig:confmat-svm} we see that \svm\ is resistant to increasing number of features. This follows the properties of the classifier mentioned in \ref{sec:theory_svm} saying that \svm s are suitable for problems with high dimensionality.
+In Figure \ref{fig:confmat-svm} we see that \svm\ is resistant to increasing number of features. This follows the properties of the classifier mentioned in Section \ref{sec:theory_svm} saying that \svm s are suitable for problems with high dimensionality.
 % subsection temp_svm_handles_increase_in_vocabulary_size_well (end)
 
 \subsection{TEMP: Why do we only need like 50 articles to get a good classification?} % (fold)
