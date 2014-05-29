@@ -1,5 +1,5 @@
 \subsection{Random Forest classifier}
-Random Forest (RF) is based on building several considerably small decision trees. Consider having a feature vector that is of length $N$, then randomly select $n << N$ of those features. Build the trees with some kind of algorithm (e.g. C4.5), where information gain is taken into consideration when splitting, and no pruning is done (i.e. expand the tree fully). Then repeat selecting $n$ new variables from $N$ until the wanted number of trees are built.
+Random Forest (RF) is based on building several small decision trees. Consider having a feature vector that is of length $N$, then randomly select $n << N$ of those features. Build the trees with some kind of algorithm (e.g. C4.5), where information gain is taken into consideration when splitting, and no pruning is done (i.e., expand the tree fully). Then repeat selecting $n$ new variables from $N$ until the wanted number of trees are built.
 \\\\
 After all the trees are built, they can be used to let a new vector of data pass through all the trees and then letting each tree \emph{vote} on what class the vector most probably should be a part of.
 
