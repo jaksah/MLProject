@@ -52,7 +52,7 @@ The Random Forest classifier splits the data into two parts in each node dependi
 
 \subsection{TEMP: Random Forest needs balanced data} % (fold)
 \label{sub:temp_random_forest_needs_balanced_data}
-One of the reason to why the Random Forest classifier tends to classify too many as sports is that Random Forest is sensitive to unbalanced training data, i.e., not having the same amount of training data for each class. In our case, we have more articles of the class sports, and less of politics and health. The classification in figure \ref{fig:confmat} follows this reasoning and shows that sports was classified 50 \% more than there are sports articles, while politics and health were classified 23 \% respectively 42 \% less than there are articles of that class.
+One of the reason to why the Random Forest classifier tends to classify too many as sports is that Random Forest is sensitive to imbalanced training data, i.e., not having the same amount of training data for each class. In our case, we have more articles of the class sports, and less of politics and health. The classification in figure \ref{fig:confmat} follows this reasoning and shows that sports was classified 50 \% more than there are sports articles, while politics and health were classified 23 \% respectively 42 \% less than there are articles of that class.
 % subsection temp_random_forest_need_balanced_data (end)
 
 \subsection{TEMP: Hybrid follows Multinomial due to default} % (fold)
