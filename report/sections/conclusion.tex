@@ -2,14 +2,16 @@
 \ifnum\printdraft>0
 	\begin{itemize}
 		\item Fuzzy match example for improvement or testing.
-		\item Random forest is sensitive to uneven spread of data between topics. Probably needs same amount of each
+		\item Term Frequency - Inverse Document Frequency (TF-IDF) is an interesting way of mapping the data so that terms that are unique for certain classes are emphasized.
+		\item ANOVA F-value
+		\item Use document characteristics as features such as average word length, number of tokens representing digits etc.
 	\end{itemize}
-	There are many different methods of representing the data selecting features that can be investigated further. Term Frequency - Inverse Document Frequency (TF-IDF) is an interesting way of mapping the data so that terms that are unique for certain classes are emphasized.\\\\
-	Use document characteristics as features such as average word length, number of tokens representing digits etc.
 \else
 \begin{center}
 	\textbf{--- DRAFT PARTS ---}
 \end{center}
 \fi
 %%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
-One of the reasons to why Random Forest tends to classify more articles as Sports might be due to the fact that there are not equally many training samples of each class. If there are more leaf-nodes leading to one type of class, and it is hard to classify the data, the Random Forest classifier will probably tend to classify them more often to the class with most training samples. It would be of interest as further work to do an investigation of how the Random Forest classifier behaves if the data is evenly balanced between the classes.
+
+One of the reasons to why Random Forest tends to classify more articles as Sports might be due to the fact that there are not equally many training samples of each class. If there are more leaf-nodes leading to one type of class, and it is hard to classify the data, the Random Forest classifier will probably tend to classify them more often to the class with most training samples. It would be of interest as further work to do an investigation of how the Random Forest classifier behaves if the data is evenly balanced between the classes.\\\\
+Future work would include analyzing different pruning techniques, e.g. TF-IDF which emphasizes words that are unique for a document and suppress the value of common words among all documents. 
