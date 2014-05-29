@@ -46,7 +46,7 @@ We can see in figure \ref{fig:hitratio-data} that by after training on just 50 a
 
 \subsection{TEMP: Why is Random Forest robust to data type?} % (fold)
 \label{sub:temp_why_is_random_forest_robust_to_data_type_}
-The \rf\ classifier splits the data into two parts in each node depending on threshold values, so if the data is normalized or not, when building the tree, does not really matter for the classifier. What we would have expected would be to see a little bit difference in the binary data type, due to the fact that it discards how \emph{many} of each word the article contains.
+The \rf\ classifier splits the data into two parts in each node depending on threshold values, so if the data is normalized or not, when building the tree, does not really matter for the classifier. We expected to see more difference in the binary data type, due to the fact that it discards how \emph{many} of each word the article contains.
 % subsection temp_why_is_random_forest_robust_to_data_type_ (end)
 
 \subsection{TEMP: Random Forest needs balanced data} % (fold)
@@ -65,7 +65,7 @@ Even a person might have difficulties to classify an article after reading it. A
 \\\\
 If we compare recognition of handwritten letters done by humans and computers, we might find that the hit ratio will be similar. We might have lots of data for recognition of handwritten letters, but when it comes to news articles, the news changes over time. For a human, a politics article might be distinguishable from a sports article due to the fact that we probably know more or less all words, but for our classifier, this will be a harder task if it was never exposed to the words. The classifier will need a lot of data over a long time to be able to recognize many types of words from different types of news.
 \\\\
-If one were to do a test out of a hundred articles from these eight topics, it would be interesting to see on average how the hit rate for a human would turn out.
+It would be interesting to see how the hit ratio would turn out if a human was to classify 100 articles from these eight topics. 
 % subsection temp_hard_to_classify_for_person (end)
 
 \subsection{Hit ratio vs number of articles in training set}
