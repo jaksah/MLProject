@@ -24,9 +24,9 @@
 The Random Forest classifier splits the data into two parts in each node depending on threshold values, so if the data is normalized or not does not really matter for the classifier. What We would have expected would be to see a little bit difference in the binary data type, due to the fact that it discards how \emph{many} of each word the article contains.
 % subsection temp_why_is_random_forest_robust_to_data_type_ (end)
 
-\subsection{TEMP: Random Forest need balanced data} % (fold)
-\label{sub:temp_random_forest_need_balanced_data}
-One of the reason to why the Random Forest classifier tends to classify too many as sports could be that Random Forest might be sensitive to unbalanced training data, i.e., not having the same amount of training data for each class. In our case, we have more articles of type sports, and less of politics and health. The classification in figure \ref{fig:confmat} follows this reasoning and shows that sports were classified 50 \% more than there are sports articles, while politics and health where classified 23 \% respectively 42 \% less than there are articles of that class.
+\subsection{TEMP: Random Forest needs balanced data} % (fold)
+\label{sub:temp_random_forest_needs_balanced_data}
+One of the reason to why the Random Forest classifier tends to classify too many as sports is that Random Forest is sensitive to unbalanced training data, i.e., not having the same amount of training data for each class. In our case, we have more articles of the class sports, and less of politics and health. The classification in figure \ref{fig:confmat} follows this reasoning and shows that sports was classified 50 \% more than there are sports articles, while politics and health were classified 23 \% respectively 42 \% less than there are articles of that class.
 % subsection temp_random_forest_need_balanced_data (end)
 
 \subsection{TEMP: Hybrid follows Multinomial due to default} % (fold)
@@ -36,9 +36,9 @@ In figures \ref{fig:hitratio} \& \ref{fig:confmat} we can see that the Hybrid cl
 
 \subsection{TEMP: Hard to classify for person} % (fold)
 \label{sub:temp_hard_to_classify_for_person}
-Even a person might have difficulties to classify a article after reading it. A reason for this might be that the particular article does not contain enough information to separate the topic from other, and even a person might classify them as differently. Imagine for example a football player, visiting a school to talk about politics.
+Even a person might have difficulties to classify an article after reading it. A reason for this might be that the particular article does not contain enough information in order to distinguish the topic, which makes the classification difficult for a person as well. Imagine for example a football player, visiting a school to talk about politics.
 \\\\
-If we compare recognition of handwritten letters done by humans and computers, we might find that the hit ratio will be similar. We might have lots of data for recognition of handwritten letters, but when it comes to news articles, the news changes over time. For a human, they might be able to distinguish a politics article from a sports article due to the fact that we probably know more or less all words, but for our classifier, this will be a harder task if never exposed to the words. The classifier will need a lot of data over a long time to be able to recognize many types of words form different types of news.
+If we compare recognition of handwritten letters done by humans and computers, we might find that the hit ratio will be similar. We might have lots of data for recognition of handwritten letters, but when it comes to news articles, the news changes over time. For a human, a politics article might be distinguishable from a sports article due to the fact that we probably know more or less all words, but for our classifier, this will be a harder task if it was never exposed to the words. The classifier will need a lot of data over a long time to be able to recognize many types of words from different types of news.
 \\\\
-If one were to do a test out of a hundred articles with these eight topics, it would be interesting to see on average how the hit rate for a human would turn out.
+If one were to do a test out of a hundred articles from these eight topics, it would be interesting to see on average how the hit rate for a human would turn out.
 % subsection temp_hard_to_classify_for_person (end)
