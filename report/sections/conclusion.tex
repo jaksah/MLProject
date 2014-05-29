@@ -1,21 +1,7 @@
-%%%%%%%%%%%%%%%%%%%% DRAFT %%%%%%%%%%%%%%
-\ifnum\printdraft>0
-	\begin{itemize}
-		%\item Fuzzy match example for improvement or testing.
-		%\item Term Frequency - Inverse Document Frequency (TF-IDF) is an interesting way of mapping the data so that terms that are unique for certain classes are emphasized.
-		\item ANOVA F-value
-		\item Use document characteristics as features such as average word length, number of tokens representing digits etc.
-	\end{itemize}
-\else
-\begin{center}
-	\textbf{--- DRAFT PARTS ---}
-\end{center}
-\fi
-%%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
 \mn\ \nb\ proved to be the most suitable classifier for the task of classifying news articles of eight different classes, since it obtained the highest hit ratio and had a good overall performance for different datatypes.
 \\\\
 \svm\ proved to be the classifier that is most sensitive of the data type. Figures \ref{fig:hitratio} and \ref{fig:hitratio-data} show that the performance is poor for the data type count and that the performance is best for the $L_2$-normalized data.
 \\\\
 It would be of interest as future work to do an investigation of how the \rf\ classifier behaves if the data is evenly balanced between the classes. For further reading in the field of very imbalanced data, see \cite{Chen}.
 \\\\
-Future work would also include analyzing other pruning techniques, e.g. TF-IDF which emphasizes words that are unique for a document and suppress the value of common words among all documents. 
+Adding document characteristics as features, such as average word length and number of digits, and analyzing other pruning techniques, e.g. TF-IDF which emphasizes words that are unique for a document and suppress the value of common words among all documents, would also be an interesting extension to this report.
