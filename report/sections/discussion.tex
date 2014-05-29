@@ -1,16 +1,16 @@
 %%%%%%%%%%%%%%%%%%%% DRAFT %%%%%%%%%%%%%%
 \ifnum\printdraft>0
 	\begin{itemize}
-		\item Random forest is sensitive to uneven spread of data between topics. Probably needs same amount of each
+		%\item Random forest is sensitive to uneven spread of data between topics. Probably needs same amount of each
 		\item SVM handles increase in vocabulary size well. Should be resistant to high dimensionality.Feedback to theory.
 		\item Why might sport and education be easy?
-		\item Hybrid follows Multinomial since it's the default.
+		%\item Hybrid follows Multinomial since it's the default.
 		\item Similarities between Tech / Science and Business / Education
-		\item Low amount of data. Difficult to classify, even for a person.
-		\item Why is random forest robust to data type?
+		%\item Low amount of data. Difficult to classify, even for a person.
+		%\item Why is random forest robust to data type?
 		\item Naive bayes good for prediction, bad estimator
-		\item All articles crawled at two points in time. Several articles may be about same thing, making it easier to predict with fewer articles in train set.
-		\item Why do we only need like 50 articles to get a good classification? Maybe the thing with articles crawler at the same time.
+		%\item All articles crawled at two points in time. Several articles may be about same thing, making it easier to predict with fewer articles in train set.
+		%\item Why do we only need like 50 articles to get a good classification? Maybe the thing with articles crawler at the same time.
 	\end{itemize}
 \else
 \begin{center}
@@ -18,10 +18,36 @@
 \end{center}
 \fi
 %%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
+Interesting results and aspects of the report will be discussed further under this section, where we will give our analysis and input on \emph{why} we think the results turned out how they did. Later, under section \ref{sec:conc_future}, conclusions will be drawn, along with suggestions on what future project should focus upon.
+
+\subsection{TEMP: Similarities between Tech / Science and Business / Education} % (fold)
+\label{sub:temp_similarities_between_tech_science_and_business_education}
+Yeeeah!
+% subsection temp_similarities_between_tech_science_and_business_education (end)
+
+\subsection{TEMP: Naïve Bayes good for prediction, bad estimator} % (fold)
+\label{sub:temp_na_ve_bayes_good_for_prediction_bad_estimator}
+Say whaaat?
+% subsection temp_na_ve_bayes_good_for_prediction_bad_estimator (end)
+
+\subsection{TEMP: Why might sport and education be easy?} % (fold)
+\label{sub:temp_why_might_sport_and_education_be_easy_}
+Cuz such cool.
+% subsection temp_why_might_sport_and_education_be_easy_ (end)
+
+\subsection{TEMP: SVM handles increase in vocabulary size well} % (fold)
+\label{sub:temp_svm_handles_increase_in_vocabulary_size_well}
+FILL DIS!
+% subsection temp_svm_handles_increase_in_vocabulary_size_well (end)
+
+\subsection{TEMP: Why do we only need like 50 articles to get a good classification?} % (fold)
+\label{sub:temp_why_do_we_only_need_like_50_articles_to_get_a_good_classification_}
+We can see in figure \ref{fig:hitratio-data} that by after training on just 50 articles the classifier was able to get a good hit ratio. This might be due to the fact that each article contains lots and lots of words, which will be enough to get a reasonable hit ratio on the test set. Another reason might be that the articles are crawled very close to each other, so that articles might be about similar news, using similar words.
+% subsection temp_why_do_we_only_need_like_50_articles_to_get_a_good_classification_ (end)
 
 \subsection{TEMP: Why is Random Forest robust to data type?} % (fold)
 \label{sub:temp_why_is_random_forest_robust_to_data_type_}
-The Random Forest classifier splits the data into two parts in each node depending on threshold values, so if the data is normalized or not does not really matter for the classifier. What We would have expected would be to see a little bit difference in the binary data type, due to the fact that it discards how \emph{many} of each word the article contains.
+The Random Forest classifier splits the data into two parts in each node depending on threshold values, so if the data is normalized or not, when building the tree, does not really matter for the classifier. What we would have expected would be to see a little bit difference in the binary data type, due to the fact that it discards how \emph{many} of each word the article contains.
 % subsection temp_why_is_random_forest_robust_to_data_type_ (end)
 
 \subsection{TEMP: Random Forest needs balanced data} % (fold)
