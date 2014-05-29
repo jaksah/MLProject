@@ -3,19 +3,19 @@
 	\centering
 	\begin{subfigure}[b]{\figwidth}
 		\includegraphics[width=\textwidth,trim=0 0 350 0, clip]{img/Bernou_percentile_5_count.png}
-		\caption{Confusion matrix of Bernoulli.}
+		\caption{Confusion matrix of \bn.}
 		\label{fig:confmat-be}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{\figwidth}
 		\includegraphics[width=\textwidth,trim=0 0 350 0, clip]{img/Multinomial_percentile_5_count.png}
-		\caption{Confusion matrix of Multinomial.}
+		\caption{Confusion matrix of \mn.}
 		\label{fig:confmat-mn}
 	\end{subfigure}
 	\\
 	\begin{subfigure}[b]{\figwidth}
 		\includegraphics[width=\textwidth,trim=0 0 350 0, clip]{img/RandomForest_percentile_5_count.png}
-		\caption{Confusion matrix of Random Forest.}
+		\caption{Confusion matrix of \rf.}
 		\label{fig:confmat-rf}
 	\end{subfigure}
 	~
@@ -27,9 +27,9 @@
 	\\
 	\begin{subfigure}[b]{\figwidth}
 		\includegraphics[width=\textwidth,trim=0 0 350 0, clip]{img/hybrid_percentile_5_count.png}
-		\caption{Confusion matrix of Hybrid.}
+		\caption{Confusion matrix of \hy.}
 		\label{fig:confmat-hybrid}
 	\end{subfigure}
-	\caption{Confusion matrices for the different classifiers. A total of 231 articles were tested. A vocabulary size of 511 words and the data type \emph{"Mapped value from 0 to 1"} were used. The rightmost column describes for a certain topic how many articles it contains and the percentage of how correct the model predicted. The bottom row describes for a certain predicted class, how many times that was the target class, and the percentage correct out of them.}
+	\caption{Confusion matrices for the different classifiers. A total of 231 articles were tested. A vocabulary size of 511 words and the data type \emph{"Mapped value from 0 to 1"} was used. The rightmost column describes for a certain topic how many articles it contains and the percentage of how correct the model predicted. The bottom row describes for a certain predicted class, how many times that was the target class, and the percentage correct out of them.}
 	\label{fig:confmat}
 \end{figure}
