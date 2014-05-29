@@ -1,9 +1,9 @@
 \subsection{Feature selection}
-Features that provide more information than others can be emphasized by feature selection. One way of assigning a score to each feature is to use the $\chi^2$ function, which is a measure of how independent a feature is of the classes. The lower the score, the more independent is the feature of the classes. Features with high scores are therefore desired. The $\chi^2$ score for a feature is given by
+Features that provide more information than others can be emphasized by feature selection. One way of assigning a score to each feature is to use the $\chi^2$ function, which is a measure of how independent a feature is of the classes. The lower the score, the more independent is the feature of the classes. Features with high scores are therefore desired. The $\chi^2_j$ score for feature $j$ is given by
 \[
-\chi^2 = \sum_{i=1}^{N_c} \sum_{j=1}^{N_f} \frac{\left ( O_{i,j} - E_{i,j} \right )^2}{E_{i,j}},
+\chi^2_j = \sum_{i=1}^{N_c} \frac{\left ( O_{i,j} - E_{i,j} \right )^2}{E_{i,j}},
 \]
-where $N_c$ is the number of classes, $N_f$ the number of features, $O_{i,j}$ is the count of feature $j$ in class $i$, and $E_{i,j}$ is the expected count given by
+where $N_c$ is the number of classes, $O_{i,j}$ is the count of feature $j$ in class $i$, and $E_{i,j}$ is the expected count given by
 \[
 E_{i,j} = \frac{N_{s,i}}{N_s} \sum_{n_c=1}^{N_c} O_{n_c,j} ,
 \]
