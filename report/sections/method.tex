@@ -16,17 +16,17 @@ A total of 734 articles were extracted. As training set 2/3 of the articles were
 \subsection{Coding}
 Python is chosen as programming language in order to extend our knowledge and experience of implementing different types of classifiers using the Scikit-learn machine learning library in Python and further understand how the data has to be prepared and presented to the classifiers.
 \subsection{Preparation of Data}
-To classify the articles as accurately and fast as possible, the data is prepared in such way that it contains as much information as possible in a format as dense as possible. To achieve this, the articles are parsed into words with white-space as separator, then removed of all characters not found in the English alphabet, though keeping the '-' character. The words are stemmed so that similar words would be on the same form, and not be seen as two different words. (E.g. "argued", "argues", "arguing" are reduced to "argu".) After stemming, all so called stop words are removed (such as "a", "the", etc.). 
+To classify the articles as accurately and fast as possible, the data is prepared in such way that it contains as much information as possible in a format as dense as possible. To achieve this, the articles are parsed into words with white-space as separator, then removed of all characters not found in the English alphabet, though keeping the '-' character. The words are stemmed so that similar words would be on the same form, and not be seen as two different words. (E.g., "argued", "argues", "arguing" are reduced to "argu".) After stemming, all so called stop words are removed (such as "a", "the", etc.). 
 \subsection{Vocabulary}
-The vocabulary is built up by unique stemmed words from the training set which consists of 2/3 of all articles. By different pruning techniques the vocabulary is reduced in size and only the most informative elements are kept. For the feature selection the score is determined by the $\chi^2$ function. The vocabulary is then pruned by selecting a percentile of the best features.
+The vocabulary is built up by unique stemmed words from the training set. By different pruning techniques the vocabulary is reduced in size and only the most informative elements are kept. For the feature selection the score is determined by the $\chi^2$ function. The vocabulary is then pruned by selecting a percentile of the best features.
 \subsection{Data Types}
 There are many different ways to represent a feature vector, and different classifiers might want it represented in different ways. We have chosen to investigate a couple of different types of representations of the vocabulary. The data types are
 \begin{description}[noitemsep,labelindent=0.5cm]
 \small
-\item[Binary:]\ Does article contain word or not.
-\item[Count:]\ How many times does article contain word.
+\item[Binary:]\ Does article contain the word or not.
+\item[Count:]\ How many times does article contain the word.
 \item[$L_2$-normalized:]\ The count array normalized with the $L_2$ norm. 
-\item[Mapped value from 0 to 1:]\ $\frac{c_i}{\max(c)}$ where $c_i$ is the count of word $i$.
+\item[Mapped value from 0 to 1:]\ $\frac{c_i}{\max(c)}$ where $c_i$ is the count of word $i$ in an article.
 \end{description}
 
 \subsection{Classifiers}
@@ -35,7 +35,7 @@ In the Scikit-learn package\footnote{\label{ftn:scikit}\url{http://scikit-learn.
 \item Naïve Bayes: Bernoulli
 \item Naïve Bayes: Multinomial
 \item Random Forest 
-\item Support Vector Machines (SVM)
+\item Support Vector Machines
 \end{itemize}
 
 \subsubsection{\bn\ \nb} % (fold)
