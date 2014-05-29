@@ -5,7 +5,7 @@ Comparing the two models using Naïve Bayes assumption in Figure \ref{fig:hitrat
 % subsection nb (end)
 
 \subsection{\svm}
-In Figure \ref{fig:confmat-svm} we see that \svm\ is resistant to increasing number of features. This follows the properties of the classifier mentioned in Section \ref{sec:theory_svm} saying that \svm s are suitable for problems with high dimensionality.
+In Figure \ref{fig:confmat-svm} we see that \svm\ is resistant to increasing number of features. This follows the properties of the classifier mentioned in Section \ref{sec:theory_svm} saying that \svm s are suitable for problems with high dimensionality. Different Kernel functions, namely radial basis function and polynomial, were tested but not investigated further since the linear Kernel function gave satisfactory results. 
 
 \subsection{\rf}
 The \rf\ classifier splits the data into two parts in each node depending on threshold values, so if the data is normalized or not, when building the tree, does not really matter for the classifier. We expected to see more difference in the binary data type, due to the fact that it discards how \emph{many} of each word the article contains.
@@ -18,7 +18,7 @@ In Figure \ref{fig:hitratio} \& \ref{fig:confmat} we can see that the \hy\ class
 \subsection{Data and Feature Selection}
 The feature selection used is based on a statistical approach; the features that are statistically dependent of the classes are rewarded a high score and are therefore kept. This is reasonable since the features that are independent of the classes does not contribute with information to the classification. It does not, however, take feature interaction into account. It might be the case that a group of features with lower scores might give more information than a feature with a high score. 
 \\\\
-As illustrated in Figure \ref{fig:hitratio-data}, the hit ratio as a function of articles in the training set has a similar behavior for all the classifiers. In general, there is an increase of the hit ratio between zero and 100 articles, and for more than 100 articles the hit ratio is constant or decreases slightly. The hit ratio peak is reached for a relatively small number of articles, considering that there are eight different article classes. This could be explained by the fact that all the articles are from the same time, and therefore cover very similar or the same events. If all articles contain very distinguishing features, these features will be found even in a small subset of the training data.
+As illustrated in Figure \ref{fig:hitratio-data}, the hit ratio as a function of articles in the training set has a similar behavior for all the classifiers. In general, there is an increase of the hit ratio between zero and 100 articles, and for more than 100 articles the hit ratio is constant or decreases slightly. The hit ratio peak is reached for a relatively small number of articles; considering that there are eight different article classes, there are only a few articles per class. This could be explained by the fact that all the articles are from the same time, and therefore cover very similar or the same events. If all articles contain very distinguishing features, these features will be found even in a small subset of the training data.
 
 %\subsection{TEMP: Why do we only need like 50 articles to get a good classification?} % (fold)
 %\label{sub:temp_why_do_we_only_need_like_50_articles_to_get_a_good_classification_}
