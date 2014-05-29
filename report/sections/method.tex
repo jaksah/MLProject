@@ -1,5 +1,5 @@
 This section describes the method of investigating the different classifiers, how the data is processed and the settings used when classifying.
-\subsection{Data retrieval}
+\subsection{Data Retrieval}
 A crawler was implemented to extract articles from BBC's RSS feed\footnote{\url{http://www.bbc.com/news/10628494}}. The crawler extracts the content of each article from eight different topics, namely
 \begin{itemize}[noitemsep,nolistsep]
 \small
@@ -38,26 +38,26 @@ In the Scikit-learn package\footnote{\label{ftn:scikit}\url{http://scikit-learn.
 \item Support Vector Machines (SVM)
 \end{itemize}
 
-\subsubsection{Bernoulli} % (fold)
+\subsubsection{\bn\ \nb} % (fold)
 \label{ssub:bernoulli}
 \input{sections/method_subsub/method_sub_ber.tex}
 % subsubsection bernoulli (end)
-\subsubsection{Multinomial} % (fold)
+\subsubsection{\mn\ \nb} % (fold)
 \label{ssub:multinomial}
 \input{sections/method_subsub/method_sub_mul.tex}
 % subsubsection multinomial (end)
-\subsubsection{Random Forest} % (fold)
+\subsubsection{\rf} % (fold)
 \label{ssub:random_forest}
 \input{sections/method_subsub/method_sub_rf.tex}
 % subsubsection random_forest (end)
-\subsubsection{Support Vector Machine} % (fold)
+\subsubsection{\svm} % (fold)
 \label{ssub:support_vector_machine}
 \input{sections/method_subsub/method_sub_svm.tex}
 % subsubsection support_vector_machine (end)
-\subsubsection{Hybrid} % (fold)
+\subsubsection{\hy} % (fold)
 \label{ssub:hybrid}
 \input{sections/method_subsub/method_sub_hyb.tex}
 % subsubsection hybrid (end)
 
 \subsection{Investigation}
-In order to compare the different classifiers and test their performance, the hit ratios will be investigated by varying the vocabulary size and the amount of articles in the training data for the different datatypes. Confusion matrices and results of how similarly the classifiers classify the articles might reveal strength and weaknesses of the classifiers as well as difficulties with the data.
+In order to compare the different classifiers and test their performance, the hit ratios will be investigated by varying the vocabulary size and the amount of articles in the training data for the different data types. Confusion matrices and results of how similarly the classifiers classify the articles might reveal strength and weaknesses of the classifiers as well as difficulties with the data.
