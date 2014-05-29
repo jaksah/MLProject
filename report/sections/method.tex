@@ -1,12 +1,4 @@
-%%%%%%%%%%%%%%%%%%%% DRAFT %%%%%%%%%%%%%%
-\ifnum\printdraft>0
-	\texttt{Some meta text here?}
-\else
-\begin{center}
-	\textbf{--- DRAFT PARTS ---}
-\end{center}
-\fi
-%%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
+This section describes the method of investigating the different classifiers, how the data is processed and the settings used when classifying.
 \subsection{Data retrieval}
 A crawler was implemented to extract articles from BBC's RSS feed\footnote{\url{http://www.bbc.com/news/10628494}}. The crawler extracts the content of each article from eight different topics, namely
 \begin{itemize}[noitemsep,nolistsep]
@@ -21,18 +13,18 @@ A crawler was implemented to extract articles from BBC's RSS feed\footnote{\url{
 \end{itemize}
 A total of 734 articles were extracted. As training set 2/3 of the articles were randomly selected and the remaining 1/3 were used as test set. Notable is that the distribution of topics is not uniform since the RSS feeds of the topics are not updated equally frequent. 
 \subsection{Coding}
-Python is chosen as programming language in order to extend our knowledge and experience of implementing different types of classifiers using the Scikit-learn machine learning library in python and further understand how the data has to be prepared and presented to the classifiers.
+Python is chosen as programming language in order to extend our knowledge and experience of implementing different types of classifiers using the Scikit-learn machine learning library in Python and further understand how the data has to be prepared and presented to the classifiers.
 \subsection{Preparation of Data}
 To classify the articles as accurately and fast as possible, the data is prepared in such way that it contains as much information as possible in a format as dense as possible. To achieve this, the articles are parsed into words with white-space as separator, then removed of all characters not found in the English alphabet, though keeping the '-' character. The words are stemmed so that similar words would be on the same form, and not be seen as two different words. (E.g. "argued", "argues", "arguing" are reduced to "argu".) After stemming, all so called stop words are removed (such as "a", "the", etc.). 
 \subsection{Vocabulary}
 The vocabulary is built up by unique stemmed words from the training set which consists of 2/3 of all articles. By different pruning techniques the vocabulary is reduced in size and only the most informative elements are kept. For the feature selection the score is determined by the $\chi^2$ function. The vocabulary is then pruned by selecting a percentile of the best features.
 \subsection{Datatypes}
-There are many different ways to represent a feature vector, and different classifiers might want it represented in different ways. We have chosen to investigate a couple of different types of representations of the vocabulary. The different datatypes were
+There are many different ways to represent a feature vector, and different classifiers might want it represented in different ways. We have chosen to investigate a couple of different types of representations of the vocabulary. The different datatypes are
 \begin{description}[noitemsep,nolistsep]
-\item[Binary:]\ \\Does article contain word or not.
-\item[Count:]\ \\How many times does article contain word.
-\item[$L_2$-normalized:]\ \\ The count array normalized with the $L_2$ norm. 
-\item[Mapped value from 0 to 1:]\ \\ $\frac{c_i}{\max(c)}$ where $c_i$ is the count of word $i$.
+\item[Binary:]\ Does article contain word or not.
+\item[Count:]\ How many times does article contain word.
+\item[$L_2$-normalized:]\ The count array normalized with the $L_2$ norm. 
+\item[Mapped value from 0 to 1:]\ $\frac{c_i}{\max(c)}$ where $c_i$ is the count of word $i$.
 \end{description}
 
 \subsection{Classifiers}
@@ -64,3 +56,6 @@ In the Scikit-learn package\footnote{\url{http://scikit-learn.org/}} there are p
 \label{ssub:hybrid}
 \input{sections/method_subsub/method_sub_hyb.tex}
 % subsubsection hybrid (end)
+
+\subsection{Investigation}
+In order to compare the different classifiers and test their performance, the hit ratios will be investigated by varying the vocabulary size and the amount of articles in the training data for the different datatypes. Confusion matrices and results of how similarly the classifiers classify the articles might reveal strength and weaknesses of the classifiers as well as difficulties with the data.
