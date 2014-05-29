@@ -19,6 +19,11 @@
 \fi
 %%%%%%%%%%%%%%%%%%%% END DRAFT %%%%%%%%%%
 
+\subsection{TEMP: Why is Random Forest robust to data type?} % (fold)
+\label{sub:temp_why_is_random_forest_robust_to_data_type_}
+The Random Forest classifier splits the data into two parts in each node depending on threshold values, so if the data is normalized or not does not really matter for the classifier. What We would have expected would be to see a little bit difference in the binary data type, due to the fact that it discards how \emph{many} of each word the article contains.
+% subsection temp_why_is_random_forest_robust_to_data_type_ (end)
+
 \subsection{TEMP: Random Forest need balanced data} % (fold)
 \label{sub:temp_random_forest_need_balanced_data}
 One of the reason to why the Random Forest classifier tends to classify too many as sports could be that Random Forest might be sensitive to unbalanced training data, i.e., not having the same amount of training data for each class. In our case, we have more articles of type sports, and less of politics and health. The classification in figure \ref{fig:confmat} follows this reasoning and shows that sports were classified 50 \% more than there are sports articles, while politics and health where classified 23 \% respectively 42 \% less than there are articles of that class.
