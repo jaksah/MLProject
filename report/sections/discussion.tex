@@ -41,3 +41,7 @@ If we compare recognition of handwritten letters done by humans and computers, w
 \\\\
 It would be interesting to see how the hit ratio would turn out if a human was to classify 100 articles from these eight topics. 
 % subsection temp_hard_to_classify_for_person (end)
+
+\subsection{Feature Selection}
+The feature selection used is based on a statistical approach; the features that are statistically dependent of the classes are rewarded a high score and are therefore kept. This is reasonable since the features that are independent of the classes does not contribute with information to the classification. It does not, however, take feature interaction into account. It might be the case that a group of features with lower scores might give more information than a feature with a high score. 
+
