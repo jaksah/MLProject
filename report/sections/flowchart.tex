@@ -1,30 +1,31 @@
 \setlength\spacing{0.5cm}
 \begin{tikzpicture}[>=latex']
 \scriptsize
-\tikzset{block/.style= {draw, rectangle, align=center,minimum width=3.5cm,minimum height=0.5cm},},
+\tikzset{block/.style= {draw, thick, rectangle, align=center,minimum width=2.25cm,minimum height=0.8cm},},
 %% Common
-\node [block]  (retrieval) {Data retrieval};
-\node [block, right =\spacing of retrieval] (preparation) {Data preparation};
-\node [block, below =0.5\spacing of preparation] (tokenize) {Tokenize};
-\node [block, left =\spacing of tokenize] (stemming) {Stemming};
-\node [block, below =0.5\spacing of stemming] (stop_words) {Remove stop words};
-\node [block, right =\spacing of stop_words] (vector) {Vector representation};
+\node [block]  (retrieval) {Data\\retrieval};
+\node [block, right =\spacing of retrieval] (preparation) {Data\\preparation};
+\node [block, right =\spacing of preparation] (tokenize) {Tokenize};
+\node [block, below =0.5\spacing of tokenize] (stemming) {Stemming};
+\node [block, left =\spacing of stemming] (stop_words) {Remove\\stop words};
+\node [block, left =\spacing of stop_words] (vector) {Vector\\representation};
 %% Vocabulary
 \node [coordinate, below =0.5\spacing of vector] (down) {};
-\node [coordinate, below =0.5\spacing of stop_words] (left) {};
-\node [block, below =\spacing of stop_words] (selection) {Feature selection};
+\node [coordinate, below =0.5\spacing of stemming] (right) {};
+\node [block, below =\spacing of vector] (selection) {Feature\\selection};
 \node [block, below =0.5\spacing of selection] (vocabulary) {Vocabulary};
 %% Classification
-\node [block, below =\spacing of vector] (classification) {Classification};
+\node [block, below =\spacing of stemming] (vocabulary_comp) {Compare with\\vocabulary};
+\node [block, below =0.5\spacing of vocabulary_comp] (classification) {Classification};
 %% Arrows
-\path[draw,->] (retrieval) edge (preparation)
+\path[draw,->,thick] (retrieval) edge (preparation)
 	(preparation) edge (tokenize)
 	(tokenize) edge (stemming)
 	(stemming) edge (stop_words)
 	(stop_words) edge (vector);
-\path[draw,->] (vector) -- (down)
-	(down) -- (left)
-	(left) -- (selection)
+\path[draw,->,thick] (down) -- (right)
+	(right) -- (vocabulary_comp)
+	(vocabulary_comp) edge (classification);
+\path[draw,->,thick] (vector) edge (selection)
 	(selection) edge (vocabulary);
-\path[draw,->] (vector) edge (classification);
 \end{tikzpicture}
