@@ -1,0 +1,30 @@
+\setlength\spacing{0.5cm}
+\begin{tikzpicture}[>=latex']
+\scriptsize
+\tikzset{block/.style= {draw, rectangle, align=center,minimum width=3.5cm,minimum height=0.5cm},},
+%% Common
+\node [block]  (retrieval) {Data retrieval};
+\node [block, right =\spacing of retrieval] (preparation) {Data preparation};
+\node [block, below =0.5\spacing of preparation] (tokenize) {Tokenize};
+\node [block, left =\spacing of tokenize] (stemming) {Stemming};
+\node [block, below =0.5\spacing of stemming] (stop_words) {Remove stop words};
+\node [block, right =\spacing of stop_words] (vector) {Vector representation};
+%% Vocabulary
+\node [coordinate, below =0.5\spacing of vector] (down) {};
+\node [coordinate, below =0.5\spacing of stop_words] (left) {};
+\node [block, below =\spacing of stop_words] (selection) {Feature selection};
+\node [block, below =0.5\spacing of selection] (vocabulary) {Vocabulary};
+%% Classification
+\node [block, below =\spacing of vector] (classification) {Classification};
+%% Arrows
+\path[draw,->] (retrieval) edge (preparation)
+	(preparation) edge (tokenize)
+	(tokenize) edge (stemming)
+	(stemming) edge (stop_words)
+	(stop_words) edge (vector);
+\path[draw,->] (vector) -- (down)
+	(down) -- (left)
+	(left) -- (selection)
+	(selection) edge (vocabulary);
+\path[draw,->] (vector) edge (classification);
+\end{tikzpicture}

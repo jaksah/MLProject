@@ -1,4 +1,12 @@
-This section describes the method of investigating the different classifiers, how the data is processed and the settings used when classifying.
+This section describes the method of investigating the different classifiers, how the data is processed and the settings used when classifying. Figure \ref{fig:flowchart} illustrates the outline of the process.
+\begin{figure}[H]
+\begin{center}
+\input{sections/flowchart.tex}
+\caption{Flow chart of the process of making a vocabulary and a feature vector from an article.}
+\label{fig:flowchart}
+\end{center}
+\end{figure}
+
 \subsection{Data Retrieval}
 A crawler was implemented to extract articles from BBC's RSS feed\footnote{\url{http://www.bbc.com/news/10628494}}. The crawler extracts the content of each article from eight different topics, namely
 \begin{itemize}[noitemsep,nolistsep]
