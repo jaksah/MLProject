@@ -1,17 +1,17 @@
 \subsection{Naïve Bayes Classifier}
-Let $c$ be the class and $A = a_1, \dots ,a_n$ be the attributes of a document. Then with Bayes Theorem
+Let $c$ be the class and $A = a_1, \dots ,a_n$ be the attributes of a document. Then Bayes Theorem states that 
 \begin{equation}
-p(c|A)=\frac{p(A|c)p(c)}{p(A)},
+p(c|A)=\frac{p(A|c)p(c)}{p(A)}.
 \end{equation}
-the attributes $A$ is classified as class $c$ if and only if
+The attributes $A$ are classified as class $c$ if and only if
 \begin{equation}
 f_b(A)=\frac{p(c|A)}{p(\neg c|A)} \geq 1,
 \end{equation}
-where $f_b(A)$ is called a $Bayesian$ classifier. Assuming all attributes are independent given the class, 
+where $f_b(A)$ is called a $Bayesian$ classifier. If assuming all attributes are independent given the class, $p(A|c)$ can be rewritten as
 \[
-p(A|c)=p(a_1,\dots ,a_n | c) = \prod_{i=1}^n p(a_i|c)
+p(A|c)=p(a_1,\dots ,a_n | c) = \prod_{i=1}^n p(a_i|c).
 \]
-the final classifier can be written as
+Now the final classifier can be written as
 \begin{equation}
 f_{nb}(A) = \frac{p(c)}{p(\neg c)}\prod_{i=1}^n\frac{p(a_i|c)}{p(a_i|\neg c)}
 \end{equation}
@@ -19,4 +19,4 @@ where $f_{nb}$ is called the \emph{Naïve Bayesian} (NB) classifier and is a \em
 \\\\
 The assumption that, given a class the attributes are independent, means that the distributions of each attribute can be estimated as a one dimensional distribution. This reduces the effect of the curse of dimensionality. In general a \nb\ classifier is a good predictor but a bad estimator. \cite{Zhang04optimality}
 \\\\
-Two models that uses the \nb\ assumption are the \emph{multi-variate Bernoulli} model and the \emph{Multinomial} model. The main difference is that they use different assumptions regarding the distribution of $p(a_i|c)$. In the \bn\ model the attributes are binary, indicating if a word from a vocabulary has occurred at least once or not, i.e. $p(a_i|c)$ has a \bn\ distribution. In the multinomial model the frequency of words are taken into account. This leads to a multinomial distribution of $p(a_i|c)$. \cite{McCallum98acomparison}\cite{bernoulliDistr}\cite{multinomialDistr}
+Two models that use the \nb\ assumption are the \emph{multi-variate Bernoulli} model and the \emph{Multinomial} model. The main difference is that they use different assumptions regarding the distribution of $p(a_i|c)$. In the \bn\ model the attributes are binary, indicating if a word from a vocabulary has occurred at least once or not, i.e. $p(a_i|c)$ has a \bn\ distribution. In the multinomial model the frequency of words are taken into account. This leads to a multinomial distribution of $p(a_i|c)$. \cite{McCallum98acomparison}\cite{bernoulliDistr}\cite{multinomialDistr}
