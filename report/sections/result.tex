@@ -3,7 +3,7 @@ The result of the analysis can be seen in Figure \ref{fig:hitratio} - \ref{fig:h
 \\\\
 The confusion matrices in Figure \ref{fig:confmat} describes the accuracy for specific topics. The rightmost column describes for a certain topic how many articles it contains and the accuracy of the topic. The bottom row describes for a certain predicted class, how many times that was the target class, and the accuracy when predicted. One can observe that Sports and Education are fairly easy to classify in contrast to Technology which is often misclassified as Science \& Environment. Notable is that \rf\ has a tendency of predicting Sports.
 \\\\
-Figure \ref{fig:hitratio-data} shows, for each model, how the hit rate depends on number of articles used as training set. The 500 features with the highest scores are kept in the vocabulary and used to train the classifiers in order to keep the dimension of the feature space constant.
+Figure \ref{fig:hitratio-data} shows, for each model, how the hit rate depends on number of articles used as training set. For each selected subset of size 6 to 503 articles the 500 features with the highest $\chi^2$ scores are kept in the vocabulary and used to train the classifiers in order to keep the dimension of the feature space constant.
 \\\\
 In Table \ref{tab:similarity} a comparison of the similarity of prediction when mispredicting is shown. The values resembles, given that both classifiers predicted wrong class, how many times they predicted the same class.
 %Table of similarities
